@@ -1,0 +1,6 @@
+#ifndef RESOURCE_RC
+#define RESOURCE_RC
+
+MY_ICON ICON "library.ico"
+
+#endif // RESOURCE_RC

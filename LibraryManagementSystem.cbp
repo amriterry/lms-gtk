@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LibraryManagementSystem" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/LibraryManagementSystem" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="system/support" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/LibraryManagementSystem" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="system/support" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-mms-bitfields" />
+			<Add directory="$(#gtk.include)" />
+			<Add directory="$(#gtk.include)/gtk-3.0" />
+			<Add directory="$(#gtk.include)/cairo" />
+			<Add directory="$(#gtk.include)/gdk" />
+			<Add directory="$(#gtk.include)/glib-2.0" />
+			<Add directory="$(#gtk.lib)/glib-2.0/include" />
+			<Add directory="$(#gtk.include)/pango-1.0" />
+			<Add directory="$(#gtk.lib)/gtk-3.0/include" />
+			<Add directory="$(#gtk.include)/atk-1.0" />
+			<Add directory="$(#gtk.include)/gdk-pixbuf-2.0" />
+			<Add directory="../LibraryManagementSystem" />
+		</Compiler>
+		<Linker>
+			<Add library="gtk-win32-3.0" />
+			<Add library="gobject-2.0" />
+			<Add library="glib-2.0" />
+			<Add library="gio-2.0" />
+			<Add directory="$(#gtk.lib)" />
+		</Linker>
+		<Unit filename="config/AppProviderRepository.cpp" />
+		<Unit filename="config/AppProviderRepository.h" />
+		<Unit filename="controllers/AppControllerRepository.cpp" />
+		<Unit filename="controllers/AppControllerRepository.h" />
+		<Unit filename="controllers/LoginController.cpp" />
+		<Unit filename="controllers/LoginController.h" />
+		<Unit filename="controllers/MainController.cpp" />
+		<Unit filename="controllers/MainController.h" />
+		<Unit filename="controllers/SplashController.cpp" />
+		<Unit filename="controllers/SplashController.h" />
+		<Unit filename="controllers/TestController.cpp" />
+		<Unit filename="controllers/TestController.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="system/bundle/Bundle.cpp" />
+		<Unit filename="system/bundle/Bundle.h" />
+		<Unit filename="system/bundle/BundleServiceProvider.cpp" />
+		<Unit filename="system/bundle/BundleServiceProvider.h" />
+		<Unit filename="system/config/ConfigManager.cpp" />
+		<Unit filename="system/config/ConfigManager.h" />
+		<Unit filename="system/config/ConfigRepository.cpp" />
+		<Unit filename="system/config/ConfigRepository.h" />
+		<Unit filename="system/controller/Controller.cpp" />
+		<Unit filename="system/controller/Controller.h" />
+		<Unit filename="system/controller/ControllerLifeCycleManager.cpp" />
+		<Unit filename="system/controller/ControllerLifeCycleManager.h" />
+		<Unit filename="system/controller/ControllerManager.cpp" />
+		<Unit filename="system/controller/ControllerManager.h" />
+		<Unit filename="system/controller/ControllerRepository.h" />
+		<Unit filename="system/controller/ControllerState.h" />
+		<Unit filename="system/controller/ControllerStateManager.cpp" />
+		<Unit filename="system/controller/ControllerStateManager.h" />
+		<Unit filename="system/events/EventDispatcher.cpp" />
+		<Unit filename="system/events/EventDispatcher.h" />
+		<Unit filename="system/events/EventServiceProvider.cpp" />
+		<Unit filename="system/events/EventServiceProvider.h" />
+		<Unit filename="system/events/UnregisteredEventFiringException.cpp" />
+		<Unit filename="system/events/UnregisteredEventFiringException.h" />
+		<Unit filename="system/facades/AppFacade.h" />
+		<Unit filename="system/facades/BundleFacade.h" />
+		<Unit filename="system/facades/ConfigManagerFacade.h" />
+		<Unit filename="system/facades/ControllerLifeManagerFacade.h" />
+		<Unit filename="system/facades/ControllerManagerFacade.h" />
+		<Unit filename="system/facades/EventFacade.h" />
+		<Unit filename="system/facades/Facade.cpp" />
+		<Unit filename="system/facades/Facade.h" />
+		<Unit filename="system/facades/PathFacade.h" />
+		<Unit filename="system/facades/RequestFacade.h" />
+		<Unit filename="system/facades/ViewFacade.h" />
+		<Unit filename="system/foundation/Application.cpp" />
+		<Unit filename="system/foundation/Application.h" />
+		<Unit filename="system/foundation/Container.cpp" />
+		<Unit filename="system/foundation/Container.h" />
+		<Unit filename="system/foundation/KeyNotFoundException.cpp" />
+		<Unit filename="system/foundation/KeyNotFoundException.h" />
+		<Unit filename="system/foundation/PathManager.cpp" />
+		<Unit filename="system/foundation/PathManager.h" />
+		<Unit filename="system/foundation/ProviderRepository.h" />
+		<Unit filename="system/foundation/RunTimeException.cpp" />
+		<Unit filename="system/foundation/RunTimeException.h" />
+		<Unit filename="system/foundation/Service.cpp" />
+		<Unit filename="system/foundation/Service.h" />
+		<Unit filename="system/foundation/ServiceProvider.h" />
+		<Unit filename="system/foundation/ServiceProviderManager.cpp" />
+		<Unit filename="system/foundation/ServiceProviderManager.h" />
+		<Unit filename="system/foundation/UnboundResolvingException.cpp" />
+		<Unit filename="system/foundation/UnboundResolvingException.h" />
+		<Unit filename="system/hash/HashFactory.cpp" />
+		<Unit filename="system/hash/HashFactory.h" />
+		<Unit filename="system/hash/HashServiceProvider.cpp" />
+		<Unit filename="system/hash/HashServiceProvider.h" />
+		<Unit filename="system/request/Request.cpp" />
+		<Unit filename="system/request/Request.h" />
+		<Unit filename="system/request/RequestServiceProvider.cpp" />
+		<Unit filename="system/request/RequestServiceProvider.h" />
+		<Unit filename="system/support/GAppEventCallback.h" />
+		<Unit filename="system/support/IBindable.h" />
+		<Unit filename="system/support/IEventPublisher.h" />
+		<Unit filename="system/test/TestServiceProvider.h" />
+		<Unit filename="system/views/ViewManager.cpp" />
+		<Unit filename="system/views/ViewManager.h" />
+		<Unit filename="system/views/ViewServiceProvider.cpp" />
+		<Unit filename="system/views/ViewServiceProvider.h" />
+		<Unit filename="vendor/rapidjson/document.h" />
+		<Unit filename="vendor/rapidjson/filestream.h" />
+		<Unit filename="vendor/rapidjson/internal/pow10.h" />
+		<Unit filename="vendor/rapidjson/internal/stack.h" />
+		<Unit filename="vendor/rapidjson/internal/strfunc.h" />
+		<Unit filename="vendor/rapidjson/prettywriter.h" />
+		<Unit filename="vendor/rapidjson/rapidjson.h" />
+		<Unit filename="vendor/rapidjson/reader.h" />
+		<Unit filename="vendor/rapidjson/stringbuffer.h" />
+		<Unit filename="vendor/rapidjson/writer.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build extract_all="1" />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
