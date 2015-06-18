@@ -1,23 +1,27 @@
+#include <gtk/gtk.h>
+
 #include <system/hash/HashFactory.h>
+
+#include <vendor/hashlib/hashlibpp.h>
 
 namespace tuber{
 
-HashFactory::HashFactory(string encryptionKey) : m_encryptionKey(encryptionKey){}
-
-string HashFactory::encrypt(string stringToEncrypt){
-	if(!this->m_encryptionKey.size()){
-		return stringToEncrypt;
-	}
-
-	for(string::size_type i = 0;i < stringToEncrypt.size(); ++i){
-		stringToEncrypt[i] ^= m_encryptionKey[i%this->m_encryptionKey.size()];
-	}
-
-	return stringToEncrypt;
+HashFactory::HashFactory(string encryptionKey) : m_encryptionKey(encryptionKey){
+	this->m_hashWrapper = new md5wrapper();
 }
 
-string HashFactory::decrypt(string stringToDecrypt){
-	return this->encrypt(stringToDecrypt);
+string HashFactory::encrypt(string stringToEncrypt){
+    try{
+        string hashed = this->m_hashWrapper->getHashFromString(stringToEncrypt);
+
+        return hashed;
+    } catch(hlException &e) {
+    	g_error("%s",e.error_message().c_str());
+    }
+}
+
+HashFactory::~HashFactory(){
+	delete this->m_hashWrapper;
 }
 
 }

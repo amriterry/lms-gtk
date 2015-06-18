@@ -6,6 +6,7 @@
 #include <system/request/RequestServiceProvider.h>
 #include <system/test/TestServiceProvider.h>
 #include <system/hash/HashServiceProvider.h>
+#include <system/database/DatabaseServiceProvider.h>
 
 using namespace std;
 using namespace tuber;
@@ -14,7 +15,8 @@ AppProviderRepository::AppProviderRepository(Application *app) : ProviderReposit
 	this->m_providers = {
         new BundleServiceProvider(app),
         new RequestServiceProvider(app),
-        new HashServiceProvider(app)
+        new HashServiceProvider(app),
+        new DatabaseServiceProvider(app)
 	};
 }
 

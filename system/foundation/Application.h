@@ -1,9 +1,9 @@
 #ifndef _APPLICATION_H_
 #define _APPLICATION_H_
 
-#include <functional>
 #include <string>
 #include <vector>
+#include <functional>
 
 #include <gtk/gtk.h>
 
@@ -13,26 +13,28 @@
 namespace tuber{
 
 class Application;
-class ServiceProvider;
-class ConfigRepository;
-class ProviderRepository;
-class ControllerRepository;
-class ConfigManager;
-class ControllerManager;
-class ServiceProviderManager;
-class EventDispatcher;
 class ViewManager;
 class PathManager;
+class ConfigManager;
+class ServiceProvider;
+class EventDispatcher;
+class ConfigRepository;
+class ControllerManager;
+class ProviderRepository;
+class ControllerRepository;
+class ServiceProviderManager;
 
+//  Aliasing GtkApplication callback to ApplicationCallback
 typedef void (*ApplicationCallback)(GtkApplication*,gpointer);
+//  Aliasing event callback for Application to ApplicationEventCallback
 typedef function<void(Application*)> ApplicationEventCallback;
 
-/** \class Application
- * \brief Main Application Class
- * \details The main application class stores every object resolved out of the container and
+/**
+ * @class Application
+ * @brief Main Application Class
+ * @details The main application class stores every object resolved out of the container and
  *          handles all object creation and deletion process automatically. So any object resolved
  *          out of container should not be deleted manually.
- *
  */
 
 class Application : public Container, public IEventPublisher{
@@ -41,14 +43,13 @@ public:
     string getAppName();
     GtkApplication* getGtkApp();
 
-    ConfigManager* getConfigManager();
-    ControllerManager* getControllerManager();
-    ServiceProviderManager* getServiceProviderManager();
-
-    EventDispatcher* getEventDispatcher();
+    PathManager* getPathManager();
     ViewManager* getViewManager();
+    ConfigManager* getConfigManager();
+    EventDispatcher* getEventDispatcher();
+    ControllerManager* getControllerManager();
+    ServiceProviderManager* getServiceProviderManager(); 
 
-    static Application* getInstance();
 
     //Application state info methods
     bool isPrebooted();
@@ -60,14 +61,16 @@ public:
     void loadControllers(ControllerRepository* controllerRespo);
 
     //Application EventRegistering Methods
-    void setPrebootCallback(ApplicationEventCallback prebootCallback);
     void setBootCallback(ApplicationEventCallback bootCallback);
     void setQuitCallback(ApplicationEventCallback quitCallback);
+    void setPrebootCallback(ApplicationEventCallback prebootCallback);
     void setActivateCallback(ApplicationCallback activateCallback,gpointer data = NULL);
     void setShutdownCallback(ApplicationCallback shutdownCallback,gpointer data = NULL);
 
     //Application Run method
     int run(int &argc,char** &argv);
+
+    static Application* getInstance();
 
     //Application Creating Method
     static Application* create(string appId,string appName,GApplicationFlags flags = G_APPLICATION_FLAGS_NONE);
@@ -95,48 +98,35 @@ protected:
     //Application Controller methods
     void loadDefaultController();
 
-    //Application ServiceProvider registering methods
-    /*void registerProvider(ServiceProvider* provider);
-    bool isProviderRegistered(ServiceProvider* provider);
-    void markAsRegistered(ServiceProvider* provider);*/
-
-    //Application Controller registering methods
-    /*void registerController(string controllerKey,ControllerResolvingCallback callback);
-    bool isControllerRegistered(string controllerKey);
-    void markControllerAsRegistered(string controllerKey);*/
-
     //Application life state methods
-    void onPreboot(IEventPublisher* publisher);
     void onBoot(IEventPublisher* publisher);
     void onQuit(IEventPublisher* publisher);
+    void onPreboot(IEventPublisher* publisher);
 
-    void preboot();
     void boot();
+    void bootUp();
+    void preboot();
 
     //Application boot up method
-    void bootUp();
 
+    bool m_booted;
+    bool m_prebooted;
     string m_appId;
     string m_appName;
-    bool m_prebooted;
-    bool m_booted;
 
     GtkApplication* m_GtkApp;
     GApplicationFlags m_flags;
 
+    ViewManager* m_viewManager;
     PathManager* m_pathManager;
     ConfigManager* m_configManager;
+    EventDispatcher* m_eventDispatcher;
     ControllerManager* m_controllerManager;
     ServiceProviderManager* m_serviceProviderManager;
 
-    EventDispatcher* m_eventDispatcher;
-    ViewManager* m_viewManager;
-
-    //vector<string> m_controllers;
-    //vector<ServiceProvider*> m_serviceProviders;
-    vector<ApplicationEventCallback> m_prebootCallbacks;
     vector<ApplicationEventCallback> m_bootCallbacks;
     vector<ApplicationEventCallback> m_quitCallbacks;
+    vector<ApplicationEventCallback> m_prebootCallbacks;
     map<ApplicationCallback,gpointer> m_activateCallbacks;
     map<ApplicationCallback,gpointer> m_shutdownCallbacks;
 

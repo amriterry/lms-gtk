@@ -7,15 +7,18 @@
 
 using namespace std;
 
+class hashwrapper;
+
 namespace tuber{
 
 class HashFactory: public Service{
 public:
 	HashFactory(string encryptionKey);
 	string encrypt(string stringToCrypt);
-	string decrypt(string stringToCrypt);
+	virtual ~HashFactory();
 private:
 	string m_encryptionKey;
+	hashwrapper* m_hashWrapper;
 };
 
 }

@@ -7,7 +7,6 @@ using namespace tuber;
 
 class MainController : public Controller{
 public:
-    MainController(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager);
     void onCreate(Bundle* package);
     void onPause();
 };

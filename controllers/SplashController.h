@@ -10,7 +10,6 @@ using namespace tuber;
 
 class SplashController: public Controller{
 public:
-	SplashController(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager) : Controller(app,stateManager,viewManager){}
 	void onCreate(Bundle* package);
 	void onStart();
 	void onPause();

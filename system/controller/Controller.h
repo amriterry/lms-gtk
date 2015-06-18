@@ -44,6 +44,8 @@ public:
 
     void startController(Request* controllerRequest);
 
+    void setControllerDependencies(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager);
+
     void setChildController(Controller* controller);
     void setParentController(Controller* controller);
 
@@ -53,7 +55,7 @@ public:
     void setContentView(string viewPath,bool toplevel);
     void setContentView(string viewPath,string nodeName = "root",bool toplevel = false);
 protected:
-    Controller(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager);
+    Controller();
 
     bool m_builderBinded;
     bool m_rootSceneBinded;

@@ -29,7 +29,7 @@ public:
 	void fire(string event);
 	void fireIfExists(string event);
 
-	~EventDispatcher() { g_message("Event Dispatcher deleting"); }
+	~EventDispatcher() { g_message("EventDispatcher: deleting"); }
 private:
 	map<string,map<IEventPublisher*,vector<EventCallback>>> listeners;
 	bool isListening(string event);

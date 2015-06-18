@@ -7,8 +7,8 @@ using namespace tuber;
 
 class LoginController : public Controller{
 public:
-    LoginController(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager);
     void onCreate(Bundle* package);
+    void onStart();
     void onPause();
 };
 

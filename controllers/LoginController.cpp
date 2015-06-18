@@ -3,20 +3,17 @@
 #include "LoginController.h"
 
 #include <system/facades/Facades.h>
+#include <system/database/model/Model.h>
 
 using namespace std;
 using namespace tuber;
-
-LoginController::LoginController(Application *app,ControllerStateManager* stateManager,ViewManager* viewManager) : Controller(app,stateManager,viewManager){
-		g_message("LoginController: Login Controller Created");
-}
 
 void LoginController::onCreate(Bundle* package){
 	Controller::onCreate(package);
 
 	g_message("LoginController: onCreate()");
 
-	GtkWindow* stage = ViewFacade::get()->getDefaultStage();
+	GtkWindow* stage = View::get()->getDefaultStage();
 	gtk_window_set_decorated(stage,true);
 	setContentView("views/login.glade");
 
@@ -49,14 +46,17 @@ void LoginController::onCreate(Bundle* package){
 					g_message("Not Logged in");
 			}
 
-			g_message("Username: %s and Password: %s",username.c_str(),HashFacade::get()->encrypt(password).c_str());
+			g_message("Username: %s and Password: %s",username.c_str(),Hash::get()->encrypt(password).c_str());
 	};
 
 	g_signal_connect(loginBtn,"clicked",G_CALLBACK(callback),entries);
 
 }
 
+void LoginController::onStart(){
+}
+
 void LoginController::onPause(){
-		g_message("LoginController: Pausing");
-		finish();
+    g_message("LoginController: Pausing");
+    finish();
 }

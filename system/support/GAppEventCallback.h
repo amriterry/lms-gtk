@@ -3,6 +3,7 @@
 
 namespace tuber{
 
+//	Aliasing GtkApplication Event callbacks
 typedef void (*GAppEventCallback)(GtkWidget*,gpointer);
 
 }

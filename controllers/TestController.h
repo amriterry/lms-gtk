@@ -7,8 +7,8 @@ using namespace tuber;
 
 class TestController: public Controller{
 public:
-	TestController(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager) : Controller(app,stateManager,viewManager){}
 	void onCreate(Bundle* package);
+	void onStart();
 };
 
 #endif

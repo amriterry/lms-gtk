@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1433234287 source:e:\semproject\librarymanagementsystem\system\foundation\application.cpp
+1434472038 source:e:\semproject\librarymanagementsystem\system\foundation\application.cpp
 	"Application.h"
 	<iostream>
 	<string>
@@ -23,12 +23,13 @@
 	<system/views/ViewServiceProvider.h>
 	<vendor/rapidjson/document.h>
 
-1433229263 source:e:\semproject\librarymanagementsystem\main.cpp
+1434591205 source:e:\semproject\librarymanagementsystem\main.cpp
 	<iostream>
 	<gtk/gtk.h>
+	<system/config/ConfigManager.h>
+	<config/AppProviderRepository.h>
 	<system/foundation/Application.h>
 	<system/config/ConfigRepository.h>
-	<config/AppProviderRepository.h>
 	<controllers/AppControllerRepository.h>
 
 1379751018 c:\gtk\include\gtk-3.0\gtk\gtk.h
@@ -2514,10 +2515,10 @@
 1430991390 source:e:\semproject\librarymanagementsystem\system\foundation\iapplication.cpp
 	"IApplication.h"
 
-1433225989 e:\semproject\librarymanagementsystem\system\foundation\application.h
-	<functional>
+1434472167 e:\semproject\librarymanagementsystem\system\foundation\application.h
 	<string>
 	<vector>
+	<functional>
 	<gtk/gtk.h>
 	<system/foundation/Container.h>
 	<system/support/IEventPublisher.h>
@@ -2534,7 +2535,7 @@
 	<gtk/gtk.h>
 	<system/support/IBindable.h>
 
-1433210281 source:e:\semproject\librarymanagementsystem\system\foundation\container.cpp
+1434475688 source:e:\semproject\librarymanagementsystem\system\foundation\container.cpp
 	<cstdlib>
 	<ctime>
 	<algorithm>
@@ -2627,26 +2628,27 @@
 	<system/foundation/ServiceProvider.h>
 	<system/foundation/Container.h>
 
-1433242813 source:e:\semproject\librarymanagementsystem\config\appproviderrepository.cpp
+1433780110 source:e:\semproject\librarymanagementsystem\config\appproviderrepository.cpp
 	<vector>
 	<config/AppProviderRepository.h>
 	<system/bundle/BundleServiceProvider.h>
 	<system/request/RequestServiceProvider.h>
 	<system/test/TestServiceProvider.h>
 	<system/hash/HashServiceProvider.h>
+	<system/database/DatabaseServiceProvider.h>
 
-1433221196 source:e:\semproject\librarymanagementsystem\controllers\appcontrollerrepository.cpp
+1434103198 source:e:\semproject\librarymanagementsystem\controllers\appcontrollerrepository.cpp
 	<controllers/AppControllerRepository.h>
 	<system/controller/ControllerStateManager.h>
 	<system/foundation/Application.h>
 	<system/views/ViewManager.h>
-	<system/facades/AppFacade.h>
+	<system/facades/App.h>
 	"MainController.h"
 	"TestController.h"
 	"SplashController.h"
 	"LoginController.h"
 
-1433234528 source:e:\semproject\librarymanagementsystem\controllers\maincontroller.cpp
+1433403295 source:e:\semproject\librarymanagementsystem\controllers\maincontroller.cpp
 	<gtk/gtk.h>
 	"MainController.h"
 	<system/facades/Facades.h>
@@ -2661,7 +2663,7 @@
 	<string>
 	<functional>
 
-1433077646 e:\semproject\librarymanagementsystem\controllers\maincontroller.h
+1433402769 e:\semproject\librarymanagementsystem\controllers\maincontroller.h
 	<system/controller/Controller.h>
 
 1432820853 e:\semproject\librarymanagementsystem\\system\foundation\controller.h
@@ -2707,13 +2709,14 @@
 	<system/foundation/ControllerLifeCycleManager.h>
 	<system/support/IBindable.h>
 
-1432822901 source:e:\semproject\librarymanagementsystem\system\foundation\serviceprovidermanager.cpp
+1434542969 source:e:\semproject\librarymanagementsystem\system\foundation\serviceprovidermanager.cpp
 	<gtk/gtk.h>
 	<vector>
 	<algorithm>
 	<system/foundation/ServiceProviderManager.h>
 	<system/foundation/ServiceProvider.h>
 	<system/foundation/ProviderRepository.h>
+	<system/events/EventDispatcher.h>
 
 1431320186 e:\semproject\librarymanagementsystem\\system\foundation\controllerlifecyclemanager.h
 	<vector>
@@ -2744,7 +2747,7 @@
 
 1432822901 e:\semproject\librarymanagementsystem\\system\controller\controllerstate.h
 
-1433220556 source:e:\semproject\librarymanagementsystem\system\controller\controller.cpp
+1434593527 source:e:\semproject\librarymanagementsystem\system\controller\controller.cpp
 	<gtk/gtk.h>
 	<system/controller/Controller.h>
 	<system/views/ViewManager.h>
@@ -2758,7 +2761,7 @@
 	<system/support/IBindable.h>
 	<system/controller/ControllerState.h>
 
-1433219678 source:e:\semproject\librarymanagementsystem\system\controller\controllerlifecyclemanager.cpp
+1434549917 source:e:\semproject\librarymanagementsystem\system\controller\controllerlifecyclemanager.cpp
 	<gtk/gtk.h>
 	<algorithm>
 	<system/controller/ControllerLifeCycleManager.h>
@@ -2805,9 +2808,10 @@
 	<gtk/gtk.h>
 	<system/foundation/ServiceProvider.h>
 
-1433049555 source:e:\semproject\librarymanagementsystem\system\bundle\bundle.cpp
+1434586892 source:e:\semproject\librarymanagementsystem\system\bundle\bundle.cpp
 	<system/bundle/Bundle.h>
 	<system/foundation/KeyNotFoundException.h>
+	<system/facades/Facades.h>
 	<string>
 	<map>
 
@@ -2816,15 +2820,16 @@
 	<map>
 	<system/foundation/Service.h>
 
-1432831019 source:e:\semproject\librarymanagementsystem\system\bundle\bundleserviceprovider.cpp
+1433293961 source:e:\semproject\librarymanagementsystem\system\bundle\bundleserviceprovider.cpp
 	<gtk/gtk.h>
 	<system/bundle/BundleServiceProvider.h>
 	<system/bundle/Bundle.h>
 
-1432831305 source:e:\semproject\librarymanagementsystem\system\request\request.cpp
+1434590328 source:e:\semproject\librarymanagementsystem\system\request\request.cpp
 	<string>
 	<gtk/gtk.h>
 	<system/request/Request.h>
+	<system/facades/Facades.h>
 
 1432831324 e:\semproject\librarymanagementsystem\\system\request\request.h
 	<string>
@@ -3252,12 +3257,12 @@
 	<vector>
 	<system/foundation/Application.h>
 
-1432831410 e:\semproject\librarymanagementsystem\system\support\ibindable.h
+1434543274 e:\semproject\librarymanagementsystem\system\support\ibindable.h
 	<string>
 
 1432822901 e:\semproject\librarymanagementsystem\system\support\ieventpublisher.h
 
-1432824344 e:\semproject\librarymanagementsystem\system\bundle\bundleserviceprovider.h
+1433293914 e:\semproject\librarymanagementsystem\system\bundle\bundleserviceprovider.h
 	<system/foundation/Container.h>
 	<system/foundation/ServiceProvider.h>
 
@@ -3289,7 +3294,7 @@
 	<string>
 	<functional>
 
-1433219859 e:\semproject\librarymanagementsystem\system\controller\controller.h
+1433402466 e:\semproject\librarymanagementsystem\system\controller\controller.h
 	<gtk/gtk.h>
 	<system/support/IBindable.h>
 	<system/support/GAppEventCallback.h>
@@ -3297,32 +3302,33 @@
 
 1432822901 e:\semproject\librarymanagementsystem\system\controller\controllerstate.h
 
-1433049609 e:\semproject\librarymanagementsystem\system\bundle\bundle.h
+1434543398 e:\semproject\librarymanagementsystem\system\bundle\bundle.h
 	<string>
 	<map>
 	<system/foundation/Service.h>
 	<system/foundation/KeyNotFoundException.h>
+	<system/bundle/BindingType.h>
 
 1432822901 e:\semproject\librarymanagementsystem\system\controller\controllerstatemanager.h
 	<system/support/IBindable.h>
 	<system/controller/ControllerState.h>
 
-1433042235 e:\semproject\librarymanagementsystem\system\controller\controllermanager.h
+1433426313 e:\semproject\librarymanagementsystem\system\controller\controllermanager.h
 	<string>
 	<vector>
 	<system/support/IBindable.h>
 	<system/controller/ControllerRepository.h>
 
-1433217193 e:\semproject\librarymanagementsystem\system\controller\controllerlifecyclemanager.h
+1433402962 e:\semproject\librarymanagementsystem\system\controller\controllerlifecyclemanager.h
 	<vector>
 	<system/support/IBindable.h>
 
-1432831324 e:\semproject\librarymanagementsystem\system\request\request.h
+1434590858 e:\semproject\librarymanagementsystem\system\request\request.h
 	<string>
 	<gtk/gtk.h>
 	<system/foundation/Service.h>
 
-1433057931 e:\semproject\librarymanagementsystem\system\events\eventdispatcher.h
+1433293629 e:\semproject\librarymanagementsystem\system\events\eventdispatcher.h
 	<map>
 	<vector>
 	<string>
@@ -3345,7 +3351,7 @@
 	<string>
 	<system/support/IBindable.h>
 
-1432822901 e:\semproject\librarymanagementsystem\system\foundation\serviceprovidermanager.h
+1433294421 e:\semproject\librarymanagementsystem\system\foundation\serviceprovidermanager.h
 	<vector>
 	<system/support/IBindable.h>
 
@@ -3360,7 +3366,7 @@
 	<exception>
 	<string>
 
-1433048841 source:e:\semproject\librarymanagementsystem\system\views\viewmanager.cpp
+1434589776 source:e:\semproject\librarymanagementsystem\system\views\viewmanager.cpp
 	<gtk/gtk.h>
 	<system/views/ViewManager.h>
 	<system/foundation/Application.h>
@@ -3378,22 +3384,30 @@
 1433048196 source:e:\semproject\librarymanagementsystem\system\foundation\keynotfoundexception.cpp
 	<system/foundation/KeyNotFoundException.h>
 
-1433058274 e:\semproject\librarymanagementsystem\system\support\gappeventcallback.h
+1434589220 e:\semproject\librarymanagementsystem\system\support\gappeventcallback.h
 
-1433206606 e:\semproject\librarymanagementsystem\controllers\testcontroller.h
+1433779838 e:\semproject\librarymanagementsystem\controllers\testcontroller.h
 	<system/controller/Controller.h>
 
-1433065155 e:\semproject\librarymanagementsystem\system\facades\app.h
+1434590764 e:\semproject\librarymanagementsystem\system\facades\app.h
 	<system/facades/Facade.h>
 
-1433212478 e:\semproject\librarymanagementsystem\system\facades\facade.h
+1434099234 e:\semproject\librarymanagementsystem\system\facades\facade.h
 	<string>
 	<system/foundation/Application.h>
 
-1433206685 source:e:\semproject\librarymanagementsystem\controllers\testcontroller.cpp
+1434588477 source:e:\semproject\librarymanagementsystem\controllers\testcontroller.cpp
 	"TestController.h"
+	<iostream>
+	<system/database/model/Model.h>
+	<system/facades/Facades.h>
+	<system/database/connections/Connection.h>
+	<system/database/Binding.h>
+	<system/bundle/Bundle.h>
+	<models/User.h>
+	<system/database/query/QueryBuilder.h>
 
-1433065245 source:e:\semproject\librarymanagementsystem\system\facades\facade.cpp
+1434540302 source:e:\semproject\librarymanagementsystem\system\facades\facade.cpp
 	<system/facades/Facade.h>
 	<system/foundation/Application.h>
 	<system/foundation/RunTimeException.h>
@@ -3425,21 +3439,21 @@
 	<string>
 	<system/support/IBindable.h>
 
-1433126370 source:e:\semproject\librarymanagementsystem\system\foundation\pathmanager.cpp
+1434475948 source:e:\semproject\librarymanagementsystem\system\foundation\pathmanager.cpp
 	<system/foundation/PathManager.h>
 	<system/foundation/KeyNotFoundException.h>
 
-1433220011 source:e:\semproject\librarymanagementsystem\controllers\splashcontroller.cpp
+1434645881 source:e:\semproject\librarymanagementsystem\controllers\splashcontroller.cpp
 	<windows.h>
 	<gtk/gtk.h>
 	"SplashController.h"
-	<system/facades/AppFacade.h>
-	<system/facades/ViewFacade.h>
+	<system/facades/App.h>
+	<system/facades/View.h>
 	<system/facades/RequestFacade.h>
 	<system/facades/ControllerManagerFacade.h>
 	<thread>
 
-1433215690 e:\semproject\librarymanagementsystem\controllers\splashcontroller.h
+1433402781 e:\semproject\librarymanagementsystem\controllers\splashcontroller.h
 	<system/controller/Controller.h>
 	<windows.h>
 	<gtk/gtk.h>
@@ -3449,28 +3463,32 @@
 	<system/facades/Facade.h>
 	<system/views/ViewManager.h>
 
-1433234233 source:e:\semproject\librarymanagementsystem\system\config\configmanager.cpp
+1434542003 source:e:\semproject\librarymanagementsystem\system\config\configmanager.cpp
 	<gtk/gtk.h>
 	<map>
 	<system/config/ConfigManager.h>
+	<system/foundation/Application.h>
+	<system/events/EventDispatcher.h>
 
-1433234191 e:\semproject\librarymanagementsystem\system\config\configmanager.h
+1433692976 e:\semproject\librarymanagementsystem\system\config\configmanager.h
 	<map>
 	<string>
 	<vendor/rapidjson/document.h>
 	<system/support/IBindable.h>
+	<system/support/IEventPublisher.h>
 
-1433220622 e:\semproject\librarymanagementsystem\controllers\logincontroller.h
+1433780622 e:\semproject\librarymanagementsystem\controllers\logincontroller.h
 	<system/controller/Controller.h>
 
-1433245886 source:e:\semproject\librarymanagementsystem\controllers\logincontroller.cpp
+1434590551 source:e:\semproject\librarymanagementsystem\controllers\logincontroller.cpp
 	<gtk/gtk.h>
 	"LoginController.h"
 	<system/facades/Facades.h>
+	<system/database/model/Model.h>
 
 1433222341 source:e:\semproject\librarymanagementsystem\resource.rc
 
-1433230934 e:\semproject\librarymanagementsystem\system\config\configrepository.h
+1433294980 e:\semproject\librarymanagementsystem\system\config\configrepository.h
 	<string>
 	<vendor/rapidjson/document.h>
 
@@ -3499,7 +3517,7 @@
 
 1330404847 e:\semproject\librarymanagementsystem\vendor\rapidjson\internal\strfunc.h
 
-1433230924 source:e:\semproject\librarymanagementsystem\system\config\configrepository.cpp
+1433295010 source:e:\semproject\librarymanagementsystem\system\config\configrepository.cpp
 	<fstream>
 	<iostream>
 	<regex>
@@ -3511,8 +3529,8 @@
 	<system/facades/Facade.h>
 	<system/config/ConfigManager.h>
 
-1433242914 e:\semproject\librarymanagementsystem\system\facades\facades.h
-	"AppFacade.h"
+1434103587 e:\semproject\librarymanagementsystem\system\facades\facades.h
+	"App.h"
 	"BundleFacade.h"
 	"ConfigManagerFacade.h"
 	"ControllerManagerFacade.h"
@@ -3520,8 +3538,9 @@
 	"EventFacade.h"
 	"PathFacade.h"
 	"RequestFacade.h"
-	"ViewFacade.h"
-	"HashFacade.h"
+	"View.h"
+	"Hash.h"
+	"DB.h"
 
 1433123995 e:\semproject\librarymanagementsystem\system\facades\controllerlifemanagerfacade.h
 	<system/facades/Facade.h>
@@ -3539,18 +3558,401 @@
 	<system/facades/Facade.h>
 	<system/hash/HashFactory.h>
 
-1433243016 e:\semproject\librarymanagementsystem\system\hash\hashfactory.h
+1433482801 e:\semproject\librarymanagementsystem\system\hash\hashfactory.h
 	<string>
 	<system/foundation/Service.h>
 
 1433242678 e:\semproject\librarymanagementsystem\system\hash\hashserviceprovider.h
 	<system/foundation/ServiceProvider.h>
 
-1433242982 source:e:\semproject\librarymanagementsystem\system\hash\hashfactory.cpp
+1433482813 source:e:\semproject\librarymanagementsystem\system\hash\hashfactory.cpp
+	<gtk/gtk.h>
 	<system/hash/HashFactory.h>
+	<vendor/hashlib/hashlibpp.h>
 
 1433242775 source:e:\semproject\librarymanagementsystem\system\hash\hashserviceprovider.cpp
 	<system/hash/HashServiceProvider.h>
 	<system/foundation/Application.h>
 	<system/hash/HashFactory.h>
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_md5.cpp
+	"hl_md5.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_md5.h
+	<string>
+	"hl_types.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_types.h
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_md5wrapper.cpp
+	<string>
+	<fstream>
+	<iostream>
+	<sstream>
+	"hl_md5wrapper.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_md5wrapper.h
+	"hl_hashwrapper.h"
+	"hl_md5.h"
+	<string>
+
+1318514064 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_hashwrapper.h
+	<string>
+	<fstream>
+	"hl_exception.h"
+
+1318509372 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_exception.h
+	<string>
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha1.cpp
+	"hl_sha1.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha1.h
+	"hl_types.h"
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha1wrapper.cpp
+	"hl_sha1wrapper.h"
+	"hl_sha1.h"
+	"hl_types.h"
+	<sstream>
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha1wrapper.h
+	"hl_hashwrapper.h"
+	"hl_sha1.h"
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha256.cpp
+	"hl_sha256.h"
+	<string.h>
+	<assert.h>
+	"hl_sha2mac.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha256.h
+	"hl_types.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha2mac.h
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha256wrapper.cpp
+	"hl_sha256wrapper.h"
+	"hl_sha256.h"
+	<string>
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha256wrapper.h
+	"hl_hashwrapper.h"
+	"hl_sha256.h"
+	<string>
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha2ext.cpp
+	<string.h>
+	<assert.h>
+	"hl_sha2ext.h"
+	"hl_sha2mac.h"
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha2ext.h
+	"hl_types.h"
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha384wrapper.cpp
+	"hl_sha384wrapper.h"
+	<string>
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha384wrapper.h
+	"hl_hashwrapper.h"
+	"hl_sha2ext.h"
+	<string>
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha512wrapper.cpp
+	"hl_sha512wrapper.h"
+	<string>
+
+1318506488 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_sha512wrapper.h
+	"hl_hashwrapper.h"
+	"hl_sha2ext.h"
+	<string>
+
+1318513464 source:e:\semproject\librarymanagementsystem\vendor\hashlib\hl_wrapperfactory.cpp
+	<algorithm>
+	"hl_wrapperfactory.h"
+	"hashlibpp.h"
+
+1318514006 e:\semproject\librarymanagementsystem\vendor\hashlib\hl_wrapperfactory.h
+	"hl_hashwrapper.h"
+
+1318511808 e:\semproject\librarymanagementsystem\vendor\hashlib\hashlibpp.h
+	"hl_exception.h"
+	"hl_wrapperfactory.h"
+	"hl_hashwrapper.h"
+	"hl_md5wrapper.h"
+	"hl_sha1wrapper.h"
+	"hl_sha256wrapper.h"
+	"hl_sha384wrapper.h"
+	"hl_sha512wrapper.h"
+
+1433928516 source:e:\semproject\librarymanagementsystem\system\database\databaseserviceprovider.cpp
+	<gtk/gtk.h>
+	<system/database/DatabaseServiceProvider.h>
+	<system/foundation/Container.h>
+	<system/config/ConfigManager.h>
+	<system/database/connectors/ConnectionFactory.h>
+	<system/database/DatabaseManager.h>
+	<system/facades/facades.h>
+	<system/database/model/Model.h>
+	<system/database/Binding.h>
+
+1433470844 e:\semproject\librarymanagementsystem\system\database\databaseserviceprovider.h
+	<system/foundation/ServiceProvider.h>
+
+1433778756 e:\semproject\librarymanagementsystem\system\database\connectors\connectionfactory.h
+	<map>
+	<string>
+	<system/support/IBindable.h>
+
+1433932842 e:\semproject\librarymanagementsystem\system\database\databasemanager.h
+	<map>
+	<string>
+	<system/foundation/Service.h>
+	<system/database/IConnectionResolver.h>
+
+1434211235 e:\semproject\librarymanagementsystem\system\facades\db.h
+	"Facade.h"
+	<system/database/DatabaseManager.h>
+	<system/database/connections/Connection.h>
+	<system/database/connections/QueryResult.h>
+
+1433777498 e:\semproject\librarymanagementsystem\system\database\iconnectionresolver.h
+	<string>
+
+1434206958 source:e:\semproject\librarymanagementsystem\system\database\connections\connection.cpp
+	<gtk/gtk.h>
+	<system/database/connections/Connection.h>
+	<system/database/connections/statements/Statement.h>
+
+1434207727 e:\semproject\librarymanagementsystem\system\database\connections\connection.h
+	<map>
+	<string>
+	<vector>
+	<functional>
+	<system/database/connections/ConnectionInterface.h>
+
+1434207634 e:\semproject\librarymanagementsystem\system\database\connections\connectioninterface.h
+	<string>
+	<system/database/connections/QueryResult.h>
+
+1434206967 source:e:\semproject\librarymanagementsystem\system\database\connections\sqliteconnection.cpp
+	<gtk/gtk.h>
+	<system/database/connections/SQLiteConnection.h>
+	<system/database/connectors/SQLiteConnector.h>
+	<system/database/connections/statements/SQLiteStatement.h>
+	<system/database/query/grammar/SQLiteGrammar.h>
+
+1434206738 e:\semproject\librarymanagementsystem\system\database\connections\sqliteconnection.h
+	<vendor/sqlite/sqlite3.h>
+	<system/database/connections/Connection.h>
+
+1425862586 e:\semproject\librarymanagementsystem\vendor\sqlite\sqlite3.h
+	<stdarg.h>
+
+1433776561 e:\semproject\librarymanagementsystem\system\database\connectors\connector.h
+	<map>
+	<string>
+
+1433779788 source:e:\semproject\librarymanagementsystem\system\database\connectors\connectionfactory.cpp
+	<gtk/gtk.h>
+	<system/database/connectors/ConnectionFactory.h>
+	<system/database/connectors/Connector.h>
+	<system/database/connectors/SQLiteConnector.h>
+	<system/database/connections/Connection.h>
+	<system/database/connections/SQLiteConnection.h>
+	<system/foundation/InvalidArgumentException.h>
+
+1433691939 e:\semproject\librarymanagementsystem\system\database\connectors\sqliteconnector.h
+	<system/database/connectors/Connector.h>
+	<vendor/sqlite/sqlite3.h>
+
+1433690344 e:\semproject\librarymanagementsystem\system\foundation\invalidargumentexception.h
+	<exception>
+	<string>
+
+1433950793 source:e:\semproject\librarymanagementsystem\system\database\connectors\sqliteconnector.cpp
+	<gtk/gtk.h>
+	<system/database/connectors/SQLiteConnector.h>
+	<system/facades/Facades.h>
+	<vendor/sqlite/sqlite3.h>
+
+1433780431 source:e:\semproject\librarymanagementsystem\system\database\databasemanager.cpp
+	<gtk/gtk.h>
+	<system/database/DatabaseManager.h>
+	<system/database/connectors/ConnectionFactory.h>
+	<system/facades/Facades.h>
+
+1434367224 e:\semproject\librarymanagementsystem\system\database\model\model.h
+	<string>
+	<system/support/IEventPublisher.h>
+	<system/database/connections/QueryResult.h>
+	<system/database/model/ModelQueryBuilder.h>
+
+1433690352 source:e:\semproject\librarymanagementsystem\system\foundation\invalidargumentexception.cpp
+	<system/foundation/InvalidArgumentException.h>
+
+1425862586 source:e:\semproject\librarymanagementsystem\vendor\sqlite\sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+
+1434367329 source:e:\semproject\librarymanagementsystem\system\database\model\model.cpp
+	<cstdio>
+	<ctime>
+	<gtk/gtk.h>
+	<vendor/sqlite/sqlite3.h>
+	<system/database/model/Model.h>
+	<system/database/IConnectionResolver.h>
+	<system/database/connections/Connection.h>
+	<system/database/query/QueryBuilder.h>
+	<system/database/model/ModelQueryBuilder.h>
+	<system/facades/Facades.h>
+	<system/foundation/RunTimeException.h>
+
+1434099975 e:\semproject\librarymanagementsystem\system\database\connections\queryresult.h
+	<map>
+	<vector>
+	<string>
+	<system/bundle/Bundle.h>
+
+1434331385 source:e:\semproject\librarymanagementsystem\system\database\binding.cpp
+	<system/database/Binding.h>
+
+1434329586 e:\semproject\librarymanagementsystem\system\database\binding.h
+	<map>
+	<vector>
+	<string>
+	<system/support/IBindable.h>
+
+1434207677 e:\semproject\librarymanagementsystem\system\database\connections\statements\statement.h
+	<system/database/connections/QueryResult.h>
+
+1434206591 e:\semproject\librarymanagementsystem\system\database\connections\statements\sqlitestatement.h
+	<vendor/sqlite/sqlite3.h>
+	<system/database/connections/statements/Statement.h>
+
+1434328676 source:e:\semproject\librarymanagementsystem\system\database\connections\statements\sqlitestatement.cpp
+	<gtk/gtk.h>
+	<system/database/connections/statements/SQLiteStatement.h>
+	<system/database/Binding.h>
+	<system/facades/Facades.h>
+
+1433953235 e:\semproject\librarymanagementsystem\system\database\query\grammar\sqlitegrammar.h
+	<system/database/query/grammar/Grammar.h>
+
+1434207389 e:\semproject\librarymanagementsystem\system\database\query\grammar\grammar.h
+	<list>
+	<vector>
+	<string>
+
+1434327078 e:\semproject\librarymanagementsystem\system\database\query\querybuilder.h
+	<vector>
+	<unordered_map>
+	<system/database/query/WhereBinding.h>
+	<system/bundle/BindingType.h>
+	<system/database/query/JoinStatement.h>
+	<system/database/connections/QueryResult.h>
+
+1434327073 e:\semproject\librarymanagementsystem\system\database\query\wherebinding.h
+	<string>
+	<system/bundle/BindingType.h>
+
+1434012612 e:\semproject\librarymanagementsystem\system\database\query\bindingtype.h
+
+1434012686 e:\semproject\librarymanagementsystem\system\database\query\joinstatement.h
+	<string>
+
+1434207935 e:\semproject\librarymanagementsystem\system\database\model\modelquerybuilder.h
+
+1434365015 source:e:\semproject\librarymanagementsystem\system\database\query\querybuilder.cpp
+	<gtk/gtk.h>
+	<system/database/query/QueryBuilder.h>
+	<system/database/connections/Connection.h>
+	<system/database/query/grammar/Grammar.h>
+	<system/database/Binding.h>
+	<system/facades/Facades.h>
+	<system/bundle/Bundle.h>
+
+1434378521 source:e:\semproject\librarymanagementsystem\system\database\query\grammar\grammar.cpp
+	<gtk/gtk.h>
+	<unordered_map>
+	<system/database/query/grammar/Grammar.h>
+	<system/database/query/QueryBuilder.h>
+
+1434208539 source:e:\semproject\librarymanagementsystem\system\database\model\modelquerybuilder.cpp
+	<gtk/gtk.h>
+	<system/database/model/ModelQueryBuilder.h>
+	<system/database/connections/QueryResult.h>
+	<system/database/model/Model.h>
+	<system/database/query/QueryBuilder.h>
+
+1434020010 e:\semproject\librarymanagementsystem\models\user.h
+	<system/database/model/Model.h>
+
+1434019976 source:e:\semproject\librarymanagementsystem\models\user.cpp
+	<gtk/gtk.h>
+	<models/User.h>
+
+1434103609 e:\semproject\librarymanagementsystem\system\facades\hash.h
+	<system/facades/Facade.h>
+	<system/hash/HashFactory.h>
+
+1434103602 e:\semproject\librarymanagementsystem\system\facades\view.h
+	<system/facades/Facade.h>
+	<system/views/ViewManager.h>
+
+1434327035 e:\semproject\librarymanagementsystem\system\bundle\bindingtype.h
+
+1434543799 source:e:\semproject\librarymanagementsystem\system\support\ibindable.cpp
+	<system/support/IBindable.h>
+	<system/facades/Facades.h>
 

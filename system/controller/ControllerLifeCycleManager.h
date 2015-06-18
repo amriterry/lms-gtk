@@ -29,6 +29,7 @@ public:
 	void endLife(Controller* controller);
 protected:
 	void startLife(Controller* controller,Bundle* package);
+	void initializeController(Controller* controller);
 private:
 	vector<Controller*> m_controllerStack;
 	Application* m_app;

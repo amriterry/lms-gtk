@@ -37,5 +37,9 @@ Document* ConfigRepository::getConfigDocument(){
     return &(this->m_document);
 }
 
+ConfigRepository::~ConfigRepository(){
+    g_message("ConfigRepository: Deleting ConfigRepository");
+}
+
 
 }

@@ -11,11 +11,28 @@
 
 namespace tuber{
 
-Controller::Controller(Application *app,ControllerStateManager* stateManager,ViewManager* viewManager) : m_app(app), m_stateManager(stateManager),m_viewManager(viewManager) {
+/**
+ * @brief Controller 'ctor'
+ * @details Bootstraps the controller
+ */
+Controller::Controller() {
 	this->m_builderBinded = false;
 	this->m_rootSceneBinded = false;
 	this->m_childController = nullptr;
 	this->m_parentController = nullptr;
+}
+
+/**
+ * @brief Setter for controller dependencies
+ * 
+ * @param app Application object
+ * @param stateManager [description]
+ * @param viewManager [description]
+ */
+void Controller::setControllerDependencies(Application *app,ControllerStateManager* stateManager,ViewManager* viewManager){
+    this->m_app = app;
+    this->m_stateManager = stateManager;
+    this->m_viewManager = viewManager;
 }
 
 void Controller::finish(bool bindChild){
@@ -71,10 +88,18 @@ ViewManager* Controller::getViewManager(){
 	return this->m_viewManager;
 }
 
+GtkWidget* Controller::getSceneRoot(){
+	return this->m_sceneRoot;
+}
+
 GtkWidget* Controller::getSceneObj(string objName){
     return GTK_WIDGET(gtk_builder_get_object(this->m_builder,objName.c_str()));
 }
 
+/**
+ * @brief Getter for GtkApplication
+ * @return GtkApplication created during boot process
+ */
 GtkApplication* Controller::getGtkApplication(){
     return this->m_app->getGtkApp();
 }

@@ -10,19 +10,10 @@ namespace tuber{
 class IBindable{
 public:
     virtual ~IBindable(){}
-
-    void setIdentifier(string bindingKey,int resolveId){
-    	this->m_bindingKey = bindingKey;
-    	this->m_resolveId = resolveId;
-    }
-
-    int getResolveId(){
-    	return this->m_resolveId;
-    }
-
-    string getBindingKey(){
-    	return this->m_bindingKey;
-    }
+    void setIdentifier(string bindingKey,int resolveId);
+    int getResolveId();
+    string getBindingKey();
+    void commitSucide();
 protected:
 	IBindable(){}
 private:

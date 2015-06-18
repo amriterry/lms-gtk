@@ -3,7 +3,7 @@
 #include <system/foundation/Application.h>
 #include <system/views/ViewManager.h>
 
-#include <system/facades/AppFacade.h>
+#include <system/facades/App.h>
 
 #include "MainController.h"
 #include "TestController.h"
@@ -19,33 +19,25 @@ AppControllerRepository::AppControllerRepository(Application* app) : ControllerR
     this->m_controllers.insert({
         "SplashController",
         [&](Container* app) -> IBindable* {
-            ControllerStateManager* stateManager = app->resolve<ControllerStateManager>("ControllerStateManager");
-            ViewManager* viewManager = app->resolve<ViewManager>("ViewManager");
-            return new SplashController(AppFacade::get(),stateManager,viewManager);
+            return new SplashController();
         }
     });
     this->m_controllers.insert({
         "MainController",
         [&](Container *app) -> IBindable* {
-            ControllerStateManager* stateManager = app->resolve<ControllerStateManager>("ControllerStateManager");
-            ViewManager* viewManager = app->resolve<ViewManager>("ViewManager");
-            return new MainController(AppFacade::get(),stateManager,viewManager);
+            return new MainController();
         }
     });
     this->m_controllers.insert({
         "TestController",
         [&](Container *app) -> IBindable* {
-            ControllerStateManager* stateManager = app->resolve<ControllerStateManager>("ControllerStateManager");
-            ViewManager* viewManager = app->resolve<ViewManager>("ViewManager");
-            return new TestController(AppFacade::get(),stateManager,viewManager);
+            return new TestController();
         }
     });
     this->m_controllers.insert({
         "LoginController",
         [&](Container *app) -> IBindable* {
-            ControllerStateManager* stateManager = app->resolve<ControllerStateManager>("ControllerStateManager");
-            ViewManager* viewManager = app->resolve<ViewManager>("ViewManager");
-            return new LoginController(AppFacade::get(),stateManager,viewManager);
+            return new LoginController();
         }
     });
 }

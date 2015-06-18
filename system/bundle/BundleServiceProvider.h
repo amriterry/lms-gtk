@@ -11,6 +11,7 @@ public:
 	BundleServiceProvider(Container* container) : ServiceProvider(container){
     	g_message("BundleServiceProvider: Creating BundleServiceProvider");
     }
+    void boot();
 	void registerService();
 	string provides();
 	~BundleServiceProvider();

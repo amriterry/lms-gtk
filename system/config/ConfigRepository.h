@@ -14,6 +14,7 @@ class ConfigRepository{
 public:
 	ConfigRepository(string configFile);
 	Document* getConfigDocument();
+	virtual ~ConfigRepository();
 protected:
     string m_configFile;
     Document m_document;

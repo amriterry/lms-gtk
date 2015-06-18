@@ -13,11 +13,12 @@ namespace tuber{
 
 class Bundle;
 
+/**
+ * @todo Make request object generic to create, pause etc actions of various object such as controller
+ */
 class Request: public Service{
 public:
-    Request(){
-        g_message("Request: created Request object");
-    }
+    Request();
 	void setActionKey(string actionKey);
 	string getActionKey();
 	void carryPackage(Bundle* package);

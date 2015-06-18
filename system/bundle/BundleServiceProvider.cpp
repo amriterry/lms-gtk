@@ -5,6 +5,10 @@
 
 namespace tuber{
 
+void BundleServiceProvider::boot(){
+    g_message("BundleServiceProvider: Application booted so this function is running");
+}
+
 void BundleServiceProvider::registerService(){
 	this->m_container->bind("Bundle",[&](Container* container) -> IBindable*{
 		return new Bundle();

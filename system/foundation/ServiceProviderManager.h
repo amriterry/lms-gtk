@@ -24,8 +24,8 @@ protected:
 
     bool isProviderRegistered(ServiceProvider* provider);
     void markAsRegistered(ServiceProvider* provider);
+    void destroyProviders();
 
-	ProviderRepository* m_providerRepo;
 	Application* m_app;
 	vector<ServiceProvider*> m_serviceProviders;
 };

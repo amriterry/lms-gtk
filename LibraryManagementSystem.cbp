@@ -68,6 +68,8 @@
 		<Unit filename="controllers/TestController.cpp" />
 		<Unit filename="controllers/TestController.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="models/User.cpp" />
+		<Unit filename="models/User.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
@@ -89,6 +91,36 @@
 		<Unit filename="system/controller/ControllerState.h" />
 		<Unit filename="system/controller/ControllerStateManager.cpp" />
 		<Unit filename="system/controller/ControllerStateManager.h" />
+		<Unit filename="system/database/Binding.cpp" />
+		<Unit filename="system/database/Binding.h" />
+		<Unit filename="system/database/DatabaseManager.cpp" />
+		<Unit filename="system/database/DatabaseManager.h" />
+		<Unit filename="system/database/DatabaseServiceProvider.cpp" />
+		<Unit filename="system/database/DatabaseServiceProvider.h" />
+		<Unit filename="system/database/IConnectionResolver.h" />
+		<Unit filename="system/database/connections/Connection.cpp" />
+		<Unit filename="system/database/connections/Connection.h" />
+		<Unit filename="system/database/connections/ConnectionInterface.h" />
+		<Unit filename="system/database/connections/QueryResult.h" />
+		<Unit filename="system/database/connections/SQLiteConnection.cpp" />
+		<Unit filename="system/database/connections/SQLiteConnection.h" />
+		<Unit filename="system/database/connections/statements/SQLiteStatement.cpp" />
+		<Unit filename="system/database/connections/statements/SQLiteStatement.h" />
+		<Unit filename="system/database/connections/statements/Statement.h" />
+		<Unit filename="system/database/connectors/ConnectionFactory.cpp" />
+		<Unit filename="system/database/connectors/ConnectionFactory.h" />
+		<Unit filename="system/database/connectors/Connector.h" />
+		<Unit filename="system/database/connectors/SQLiteConnector.cpp" />
+		<Unit filename="system/database/connectors/SQLiteConnector.h" />
+		<Unit filename="system/database/model/Model.cpp" />
+		<Unit filename="system/database/model/Model.h" />
+		<Unit filename="system/database/model/ModelQueryBuilder.cpp" />
+		<Unit filename="system/database/model/ModelQueryBuilder.h" />
+		<Unit filename="system/database/query/QueryBuilder.cpp" />
+		<Unit filename="system/database/query/QueryBuilder.h" />
+		<Unit filename="system/database/query/grammar/Grammar.cpp" />
+		<Unit filename="system/database/query/grammar/Grammar.h" />
+		<Unit filename="system/database/query/grammar/SQLiteGrammar.h" />
 		<Unit filename="system/events/EventDispatcher.cpp" />
 		<Unit filename="system/events/EventDispatcher.h" />
 		<Unit filename="system/events/EventServiceProvider.cpp" />
@@ -110,6 +142,8 @@
 		<Unit filename="system/foundation/Application.h" />
 		<Unit filename="system/foundation/Container.cpp" />
 		<Unit filename="system/foundation/Container.h" />
+		<Unit filename="system/foundation/InvalidArgumentException.cpp" />
+		<Unit filename="system/foundation/InvalidArgumentException.h" />
 		<Unit filename="system/foundation/KeyNotFoundException.cpp" />
 		<Unit filename="system/foundation/KeyNotFoundException.h" />
 		<Unit filename="system/foundation/PathManager.cpp" />
@@ -133,6 +167,7 @@
 		<Unit filename="system/request/RequestServiceProvider.cpp" />
 		<Unit filename="system/request/RequestServiceProvider.h" />
 		<Unit filename="system/support/GAppEventCallback.h" />
+		<Unit filename="system/support/IBindable.cpp" />
 		<Unit filename="system/support/IBindable.h" />
 		<Unit filename="system/support/IEventPublisher.h" />
 		<Unit filename="system/test/TestServiceProvider.h" />
@@ -140,6 +175,31 @@
 		<Unit filename="system/views/ViewManager.h" />
 		<Unit filename="system/views/ViewServiceProvider.cpp" />
 		<Unit filename="system/views/ViewServiceProvider.h" />
+		<Unit filename="vendor/hashlib/hashlibpp.h" />
+		<Unit filename="vendor/hashlib/hl_exception.h" />
+		<Unit filename="vendor/hashlib/hl_hashwrapper.h" />
+		<Unit filename="vendor/hashlib/hl_md5.cpp" />
+		<Unit filename="vendor/hashlib/hl_md5.h" />
+		<Unit filename="vendor/hashlib/hl_md5wrapper.cpp" />
+		<Unit filename="vendor/hashlib/hl_md5wrapper.h" />
+		<Unit filename="vendor/hashlib/hl_sha1.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha1.h" />
+		<Unit filename="vendor/hashlib/hl_sha1wrapper.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha1wrapper.h" />
+		<Unit filename="vendor/hashlib/hl_sha256.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha256.h" />
+		<Unit filename="vendor/hashlib/hl_sha256wrapper.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha256wrapper.h" />
+		<Unit filename="vendor/hashlib/hl_sha2ext.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha2ext.h" />
+		<Unit filename="vendor/hashlib/hl_sha2mac.h" />
+		<Unit filename="vendor/hashlib/hl_sha384wrapper.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha384wrapper.h" />
+		<Unit filename="vendor/hashlib/hl_sha512wrapper.cpp" />
+		<Unit filename="vendor/hashlib/hl_sha512wrapper.h" />
+		<Unit filename="vendor/hashlib/hl_types.h" />
+		<Unit filename="vendor/hashlib/hl_wrapperfactory.cpp" />
+		<Unit filename="vendor/hashlib/hl_wrapperfactory.h" />
 		<Unit filename="vendor/rapidjson/document.h" />
 		<Unit filename="vendor/rapidjson/filestream.h" />
 		<Unit filename="vendor/rapidjson/internal/pow10.h" />
@@ -150,6 +210,10 @@
 		<Unit filename="vendor/rapidjson/reader.h" />
 		<Unit filename="vendor/rapidjson/stringbuffer.h" />
 		<Unit filename="vendor/rapidjson/writer.h" />
+		<Unit filename="vendor/sqlite/sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vendor/sqlite/sqlite3.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
