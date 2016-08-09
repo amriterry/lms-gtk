@@ -8,7 +8,8 @@ enum class BindingType{
 	STRING,
 	DOUBLE,
 	BOOLEAN,
-	NULLTYPE
+	GENERIC,
+	RAW
 };
 
 }

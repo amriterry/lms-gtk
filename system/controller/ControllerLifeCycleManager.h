@@ -22,11 +22,12 @@ public:
 	void pauseController(Controller* controller);
 	void create(Controller* controller,Bundle* package);
 	void start(Controller* controller);
-	void resume(Controller* controller);
+	void resume(Controller* controller,Bundle* package);
 	void pause(Controller* controller);
 	void stop(Controller* controller);
 
 	void endLife(Controller* controller);
+	void resumeLife(Controller* controller,Bundle* pacakge);
 protected:
 	void startLife(Controller* controller,Bundle* package);
 	void initializeController(Controller* controller);

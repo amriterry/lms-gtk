@@ -89,7 +89,7 @@ public:
 	T* getGenericAtPos(int pos){
 		if(pos > 0 && pos <= currentPos){
 			pair<string,BindingType> bindingMeta = this->m_bindingPos[pos];
-			if(bindingMeta.second != BindingType::NULLTYPE){
+			if(bindingMeta.second != BindingType::GENERIC){
 				//...throw an exception
 			}
 			return getGeneric<T>(bindingMeta.first);

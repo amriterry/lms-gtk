@@ -27,8 +27,6 @@ Bundle::~Bundle(){
  * @return Same object for function call chaining
  */
 Bundle* Bundle::putExtra(string key,int value){
-
-    g_message("Bundle: Entering int at pos [%i] with key [%s]",currentPos,key.c_str());
 	this->m_integers[key] = value;
     this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::INTEGER);
     currentPos++;
@@ -44,7 +42,6 @@ Bundle* Bundle::putExtra(string key,int value){
  * @return Same object for function call chaining
  */
 Bundle* Bundle::putExtra(string key,double value){
-    g_message("Bundle: Entering double at pos [%i] with key [%s]",currentPos,key.c_str());
     this->m_doubles[key] = value;
     this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::DOUBLE);
     currentPos++;
@@ -60,7 +57,6 @@ Bundle* Bundle::putExtra(string key,double value){
  * @return Same object for function call chaining
  */
 Bundle* Bundle::putExtra(string key,bool value){
-    g_message("Bundle: Entering boolean at pos [%i] with key [%s]",currentPos,key.c_str());
     this->m_booleans[key] = value;
     this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::BOOLEAN);
     currentPos++;
@@ -76,11 +72,9 @@ Bundle* Bundle::putExtra(string key,bool value){
  * @return Same object for function call chaining
  */
 Bundle* Bundle::putExtra(string key,string value){
-    g_message("Bundle: Entering string at pos [%i] with key [%s]",currentPos,key.c_str());
     this->m_strings[key] = value;
     this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::STRING);
     currentPos++;
-    g_message("Bundle: Entered string [%s:%s]",key.c_str(),this->m_strings[key].c_str());
     return this;
 }
 
@@ -105,9 +99,8 @@ Bundle* Bundle::putExtra(string key,const char* value){
  * @return Same object for function call chaining
  */
 Bundle* Bundle::putExtra(string key,void* value){
-    g_message("Bundle: Entering generic at pos [%i] with key [%s]",currentPos,key.c_str());
     this->m_generics[key] = value;
-    this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::NULLTYPE);
+    this->m_bindingPos[currentPos] = pair<string,BindingType>(key,BindingType::GENERIC);
     currentPos++;
     return this;
 }

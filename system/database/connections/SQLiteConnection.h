@@ -20,6 +20,7 @@ public:
 	virtual void execute(string query);
 	virtual int runAffected(string query,Binding* bindings,RunAffectedCallback callback);
 	virtual int run(string query,Binding* bindings,RunCallback callback);
+	virtual void runCallback(string query,RowCallback closure,Binding* bindings,Bundle* data,RunWithCallback callback);
 	virtual QueryResult runResult(string query,Binding* bindings,RunResultCallback callback);
 
 	virtual sqlite3* getRawConnection();

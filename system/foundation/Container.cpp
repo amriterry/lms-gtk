@@ -21,7 +21,6 @@ Container::Container(){
  * @brief Container destructor
  */
 Container::~Container(){
-    g_message("Container: Deleting Instances");
     //  Deleting all instances in the container
     for_each(instances.begin(),instances.end(),[&](pair<int,IBindable*> binding){
         delete binding.second;
@@ -62,7 +61,6 @@ void Container::bind(string bindingKey,ResolvingCallback closure,bool shared){
         this->bindings[bindingKey] = shared;
 
         this->resolvingCallbacks[bindingKey] = closure;
-        g_message("Container: Binding callback for key:[%s]",bindingKey.c_str());
     }
 }
 
@@ -113,8 +111,6 @@ IBindable* Container::make(string bindingKey){
         g_error("Not Enough Memory or trying to resolve unbound object");
     }
 
-    g_message("Container: made instance of %s",bindingKey.c_str());
-
     return instance;
 }
 
@@ -131,7 +127,7 @@ IBindable* Container::build(string bindingKey){
         //  Trying to resolve abstract object using the resolving callback
         abstract = this->resolvingCallbacks[bindingKey](this);
     } catch (bad_function_call& e){
-        g_message("%s",e.what());
+        g_error("%s",e.what());
     }
 
     //  Get unique resolvedId so that new object can be binded with it
@@ -149,8 +145,6 @@ IBindable* Container::build(string bindingKey){
     }
     // finally insret the instance with resolvedId to the instances
     this->instances.insert({resolveId,abstract});
-
-    g_message("Container: Built instance of %s",bindingKey.c_str());
 
     //  Finalizing the building process by setting identifier to the abstract object
     //  This makes the object itself hold the information about bindingKey and resolvedId

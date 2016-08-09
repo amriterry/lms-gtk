@@ -12,5 +12,6 @@
 #include "View.h"
 #include "Hash.h"
 #include "DB.h"
+#include "Auth.h"
 
 #endif

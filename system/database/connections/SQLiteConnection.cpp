@@ -28,19 +28,19 @@ void SQLiteConnection::setQueryGrammar(SQLiteGrammar* grammar){
 
 
 void SQLiteConnection::beginTransaction(){
-
+	this->statement("BEGIN TRANSACTION");
 }
 
 void SQLiteConnection::commit(){
-
+	this->statement("COMMIT");
 }
 
 void SQLiteConnection::rollback(){
-
+	this->statement("ROLLBACK");
 }
 
 void SQLiteConnection::execute(string query){
-
+	this->statement(query);
 }
 
 int SQLiteConnection::runAffected(string query,Binding* bindings,RunAffectedCallback callback){
@@ -55,6 +55,12 @@ int SQLiteConnection::run(string query,Binding* bindings,RunCallback callback){
 	int val = callback(stmt,query,bindings);
 	delete stmt;
 	return val;
+}
+
+void SQLiteConnection::runCallback(string query,RowCallback closure,Binding* bindings,Bundle* data,RunWithCallback callback){
+	SQLiteStatement* stmt = new SQLiteStatement(this->getRawConnection());
+	callback(stmt,query,closure,bindings,data);
+	delete stmt;
 }
 
 QueryResult SQLiteConnection::runResult(string query,Binding* bindings,RunResultCallback callback){

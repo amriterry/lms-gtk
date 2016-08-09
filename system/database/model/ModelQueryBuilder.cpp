@@ -39,7 +39,20 @@ Model* ModelQueryBuilder::find(int pk){
 	return this->m_model;
 }
 
-bool ModelQueryBuilder::insert(Bundle* attributes){
+QueryResult ModelQueryBuilder::get(vector<string> selectStatements){
+	QueryResult result = this->m_queryBuilder->select(selectStatements)
+											->from(this->m_model->getTableName())
+											->get();
+	return result;
+}
+
+void ModelQueryBuilder::get(vector<string> selectStatements,RowCallback callback,Bundle* data){
+	this->m_queryBuilder->select(selectStatements)
+						->from(this->m_model->getTableName())
+						->get(callback,data);
+}
+
+int ModelQueryBuilder::insert(Bundle* attributes){
 	return this->m_queryBuilder->table(this->m_model->getTableName())
 								->insert(attributes);
 }

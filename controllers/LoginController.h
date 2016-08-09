@@ -8,7 +8,6 @@ using namespace tuber;
 class LoginController : public Controller{
 public:
     void onCreate(Bundle* package);
-    void onStart();
     void onPause();
 };
 

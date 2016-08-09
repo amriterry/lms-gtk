@@ -7,7 +7,7 @@
 #include <system/database/query/WhereBinding.h>
 #include <system/bundle/BindingType.h>
 #include <system/database/query/JoinStatement.h>
-
+#include <system/database/query/RowCallback.h>
 #include <system/database/connections/QueryResult.h>
 
 using namespace std;
@@ -29,6 +29,7 @@ public:
 
 	QueryRow first();
 	QueryResult get();
+	void get(RowCallback callback,Bundle* data = nullptr);
 
 	QueryBuilder* take(int limit);
 
@@ -48,6 +49,8 @@ public:
 	QueryBuilder* where(string column,string operatorValue = "=",double rValue = 0.0,string boolean = "and");
 	QueryBuilder* whereNull(string column,string operatorValue = "=",string boolean = "and");
 
+	QueryBuilder* whereRaw(string raw,string boolean = "and");
+
 	QueryBuilder* groupBy(string column);
 	QueryBuilder* groupBy(vector<string> columns);
 
@@ -57,11 +60,11 @@ public:
 
 	QueryBuilder* limit(int numRows,int offset);
 
-	bool insert(Bundle* attributes);
+	int insert(Bundle* attributes);
 	bool update(Bundle* attributes);
 	bool deleteData();
 
-	QueryBuilder* compileBundle(Bundle* bundle);
+	QueryBuilder* compileBundle(Bundle* bundle,string bindingFor);
 
 	int getLimit();
 	int getOffset();

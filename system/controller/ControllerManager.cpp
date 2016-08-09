@@ -69,10 +69,29 @@ void ControllerManager::loadController(Request* controllerRequest,Controller* cl
     this->m_lifeCycleManager->respondRequest(controllerRequest,clientController);
 }
 
-void ControllerManager::destroyController(Controller* controller){
-    g_message("ControllerManager: Destroying controller");
-    this->m_lifeCycleManager->endLife(controller);
-    this->m_app->destroyBindable(controller);
+void ControllerManager::destroyController(Controller* controller,Bundle* package){
+    if(controller != nullptr){
+        g_message("ControllerManager: Destroying controller [%s]",controller->getBindingKey().c_str());
+    
+        this->m_lifeCycleManager->endLife(controller);
+
+        g_message("ControllerManager: Ended life of [%s]",controller->getBindingKey().c_str());
+        
+        Controller* parentController = controller->getParentController();
+        
+        this->m_app->destroyBindable(controller);
+        controller = nullptr;
+
+        if(parentController != nullptr){
+            g_message("ControllerManager: Unrefrencing Child Controller of the parent controller [%s]",parentController->getBindingKey().c_str());
+            parentController->unrefChildController();
+
+            this->m_lifeCycleManager->resumeLife(parentController,package);
+            parentController = nullptr;
+            //g_message("ControllerManager: resumed Life of [%s]",parentController->getBindingKey().c_str());
+        }
+        g_message("ControllerManager: Destroyed Controller");
+    }
 }
 
 }

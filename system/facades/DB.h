@@ -5,6 +5,7 @@
 #include <system/database/DatabaseManager.h>
 #include <system/database/connections/Connection.h>
 #include <system/database/connections/QueryResult.h>
+#include <system/database/query/QueryBuilder.h>
 
 namespace tuber{
 
@@ -26,9 +27,17 @@ public:
 		return get()->connection()->resultStatement(query,nullptr);
 	}
 
-	/*static QueryBuilder* table(string table){
-		return get()->
-	}*/
+	static void rawSelect(string query,RowCallback callback,Bundle* data = nullptr){
+		get()->connection()->callbackStatement(query,callback,nullptr,data);
+	}
+
+	static QueryBuilder* table(string table){
+		return (new QueryBuilder(get()->connection(),get()->connection()->getQueryGrammar()))->table(table);
+	}
+
+	static void transaction(function<void()> callback){
+		get()->connection()->transaction(callback);
+	}
 };
 
 }

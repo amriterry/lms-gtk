@@ -18,9 +18,9 @@ namespace tuber{
 
 /**
  * @brief Manages the controller
- * 
+ *
  * @param controller Controller to be managed
- * 
+ *
  * @todo [No complete body]
  */
 void ControllerLifeCycleManager::manage(Controller* controller){
@@ -31,7 +31,7 @@ void ControllerLifeCycleManager::manage(Controller* controller){
 
 /**
  * @brief Responds to the request by creating creating controller and starting its life
- * 
+ *
  * @param controllerRequest The request object to be parsed
  * @param clientController The controller which sent the request
  */
@@ -44,7 +44,7 @@ void ControllerLifeCycleManager::respondRequest(Request* controllerRequest,Contr
 	//	Initializing controller
 	this->initializeController(controller);
 
-	//	If the client controller is not set 
+	//	If the client controller is not set
 	//	then we set the relationship between parent and child controller
 	//	Also we pause the parent controller
 	if(clientController != nullptr){
@@ -59,9 +59,9 @@ void ControllerLifeCycleManager::respondRequest(Request* controllerRequest,Contr
 
 /**
  * @brief Pauses the controller provided
- * 
+ *
  * @param controller pauses the controller
- * 
+ *
  * @todo Change the position of the controller in the controller list
  */
 void ControllerLifeCycleManager::pauseController(Controller* controller){
@@ -71,7 +71,7 @@ void ControllerLifeCycleManager::pauseController(Controller* controller){
 
 /**
  * @brief Initializes controller by injecting controller dependencies
- * 
+ *
  * @param controller Controller to initialize
  */
 void ControllerLifeCycleManager::initializeController(Controller* controller){
@@ -80,7 +80,7 @@ void ControllerLifeCycleManager::initializeController(Controller* controller){
 
 /**
  * @brief Starts the life of the controller
- * 
+ *
  * @param controller Controller whose life is to be started
  * @param package Package to inject into the controller when the controller is 'created'
  */
@@ -92,7 +92,7 @@ void ControllerLifeCycleManager::startLife(Controller* controller,Bundle* packag
 
 /**
  * @brief Ends the life of the controller
- * 
+ *
  * @param controller Controller whose life is to be ended
  */
 void ControllerLifeCycleManager::endLife(Controller* controller){
@@ -110,8 +110,23 @@ void ControllerLifeCycleManager::endLife(Controller* controller){
 }
 
 /**
+ * @brief Resumes the life of the controller
+ *
+ * @param controller Controller to be resumed
+ */
+void ControllerLifeCycleManager::resumeLife(Controller* controller,Bundle* package){
+	/*if(!controller->getStateManager()->isPaused()){
+		this->pause(controller);
+	}*/
+	this->resume(controller,package);
+	this->start(controller);
+
+	g_message("ControllerLifeCycleManager: Resumed Life of [%s]",controller->getBindingKey().c_str());
+}
+
+/**
  * @brief 'Creates' the controller and injects the package to the controller
- * 
+ *
  * @param controller Controller to be 'created'
  * @param package Package to be injected
  */
@@ -120,52 +135,60 @@ void ControllerLifeCycleManager::create(Controller* controller,Bundle* package){
 	controller->getStateManager()->setState(ControllerState::CREATE);
 	//	Calling onCreate method of the controller
 	controller->onCreate(package);
+	//	Finally Destroying the package
+	if(package != nullptr){
+		package->commitSucide();
+	}
 	//	Firing is any event exists for the $(controller).create
-	this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".create");
+	//this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".create");
 }
 
 /**
  * @brief 'Starts' the controller
- * 
+ *
  * @param controller Controller to be 'started'
  */
 void ControllerLifeCycleManager::start(Controller* controller){
 	controller->getStateManager()->setState(ControllerState::START);
 	controller->onStart();
-	this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".start");
+	//this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".start");
 }
 
 /**
  * @brief 'Resumes' the controller
- * 
+ *
  * @param controller Controller to be 'resumed'
  */
-void ControllerLifeCycleManager::resume(Controller* controller){
+void ControllerLifeCycleManager::resume(Controller* controller,Bundle* package){
 	controller->getStateManager()->setState(ControllerState::RESUME);
-	controller->onResume();
-	this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".resume");
+	controller->onResume(package);
+	if(package != nullptr){
+		package->commitSucide();
+	}
+	//this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".resume");
 }
 
 /**
  * @brief 'Pauses' controller
- * 
+ *
  * @param controller Controller to be 'paused'
  */
 void ControllerLifeCycleManager::pause(Controller* controller){
 	controller->getStateManager()->setState(ControllerState::PAUSE);
 	controller->onPause();
-	this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".pause");
+	//g_message("%s",controller->getBindingKey().c_str());
+	//this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".pause");
 }
 
 /**
  * @brief 'Stops' controller
- * 
+ *
  * @param controller Controller to be 'stoped'
  */
 void ControllerLifeCycleManager::stop(Controller* controller){
 	controller->getStateManager()->setState(ControllerState::STOP);
 	controller->onStop();
-	this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".stop");
+	//this->m_app->getEventDispatcher()->fireIfExists(controller->getBindingKey() + ".stop");
 }
 
 }

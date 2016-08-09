@@ -29,7 +29,7 @@ public:
     T* resolve(string bindingKey){
         IBindable* instance = this->make(bindingKey);
         if(instance != NULL){
-            return (T*)(instance);
+            return dynamic_cast<T*>(instance);
         } else {
             return NULL;
         }

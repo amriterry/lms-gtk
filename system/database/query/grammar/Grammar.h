@@ -21,8 +21,9 @@ public:
 	virtual string compileGroupBy(QueryBuilder* builder);
 	virtual string compileHaving(QueryBuilder* builder);
 	virtual string compileOrderBy(QueryBuilder* builder);
-	virtual string concatenateComponents(vector<string> strings,string glue);
-	virtual string concatenateComponents(list<string> strings,string glue);
+	virtual string compileLimit(QueryBuilder* builder);
+	/*virtual string concatenateComponents(vector<string> strings,string glue);
+	virtual string concatenateComponents(list<string> strings,string glue);*/
 
 	virtual string compileInsert(QueryBuilder* builder);
 	virtual string compileColumnValues(QueryBuilder* builder);

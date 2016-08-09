@@ -12,22 +12,22 @@ DatabaseManager::~DatabaseManager(){
 }
 
 Connection* DatabaseManager::makeConnection(string name){
-	g_message("DatabaseManager: Making connection of name [%s]",name.c_str());
+	//g_message("DatabaseManager: Making connection of name [%s]",name.c_str());
 	return this->m_factory->make(this->getConfig(name),name);
 }
 
 map<string,string> DatabaseManager::getConfig(string name){
-	g_message("DatabaseManager: Getting config for connection [%s]",name.c_str());
+	//g_message("DatabaseManager: Getting config for connection [%s]",name.c_str());
 	return ConfigManagerFacade::get()->getConnectionConfiguration(name);
 }
 
 Connection* DatabaseManager::connection(string name){
-	g_message("DatabaseManager: getting connection");
+	//g_message("DatabaseManager: getting connection");
 	if(name == ""){
 		name = this->getDefaultConnection();
 	}
 
-	g_message("DatabaseManager: Getting connection with name [%s]",name.c_str());
+	//g_message("DatabaseManager: Getting connection with name [%s]",name.c_str());
 
 	if(this->hasConnection(name)){
 		return this->m_connections[name];

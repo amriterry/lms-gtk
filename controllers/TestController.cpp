@@ -23,22 +23,19 @@ void TestController::onStart(){
     //Binding* binding = App::get()->resolve<Binding>("db.query.binding");
    //binding->bindInteger(-1);
     //QueryResult result = DB::get()->connection()->selectQuery("SELECT * FROM users WHERE users.user_id = ? ORDER BY users.name DESC",binding);
-    /*User* user = User::find<User>(12);
-    if(!user->fetch()->empty()){
-        g_message("Row Found");
-        cout<<user->fetch()->getString("name")<<endl;
+   // User* user = User::find<User>(12);
+   // if(!user->fetch()->empty()){
+        //g_message("Row Found");
+        //cout<<user->fetch()->getString("name")<<endl;
+       /* User* user = new User();
         user->getDirty()
             ->putExtra("name",string("Amrit jpt"))
             ->putExtra("username","terryh")
             ->putExtra("status_id",2);
         if(!user->saveRow()){
             g_message("Row not saved");
-        }
-    }*/
-
-    Bundle* package = BundleFacade::get();
-
-    package->commitSucide();
+        }*/
+   // }
 
     /*User* user = User::find<User>(2);
     if(user->deleteRow()){
@@ -51,16 +48,16 @@ void TestController::onStart(){
     //user->saveRow();
 
     //DB::rawSelect("select * from users");
-    /*QueryRow result = User::select({"users.user_id","users.name","user_reln.data"})
+    QueryResult resultUser = User::select({"users.user_id","users.name"})
                                     ->from("users")
-                                    ->join("user_reln","user_reln.user_id = users.user_id","left")
-                                    ->where("users.user_id","=",2)
-                                    ->first();
+                                   // ->join("user_reln","user_reln.user_id = users.user_id","left")
+                                    ->limit(5,2)
+                                    ->get();
 
-    //for(auto result: resultUser){
+    for(auto result: resultUser){
         if(!result->empty()){
             cout<<result->getInt("user_id")<<" = "<<result->getString("name")<<" = "<<result->getSafeString("data")<<endl;
 
         }
-    //}*/
+    }
 }

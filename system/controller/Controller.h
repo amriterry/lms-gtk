@@ -6,6 +6,8 @@
 #include <system/support/IBindable.h>
 #include <system/support/GAppEventCallback.h>
 #include <system/controller/ControllerState.h>
+#include <system/helpers/helpers.h>
+#include <system/facades/Facades.h>
 
 namespace tuber{
 
@@ -18,21 +20,28 @@ class ControllerStateManager;
 class Controller : public IBindable{
 public:
     virtual ~Controller();
-    virtual void onCreate(Bundle* package){}
-    virtual void onStart(){}
-    virtual void onResume(){}
-    virtual void onPause(){}
-    virtual void onStop(){}
-
-    void finish(bool bindChild = false);
+    virtual void onCreate(Bundle* package){
+        g_message("\n\n*******\n\n%s: onCreate\n\n********\n\n",getBindingKey().c_str());
+    }
+    virtual void onStart(){
+        g_message("\n\n*******\n\n%s: onStart\n\nOn Hierarchy: [%s]\n\n********\n\n",getBindingKey().c_str(),Strings::join(getHierarchy()," >> ").c_str());
+    }
+    virtual void onResume(Bundle* pacakge){
+        g_message("\n\n*******\n\n%s: onResume\n\n********\n\n",getBindingKey().c_str());
+    }
+    virtual void onPause(){
+        g_message("\n\n*******\n\n%s: onPause\n\n********\n\n",getBindingKey().c_str());
+    }
+    virtual void onStop(){
+        g_message("\n\n*******\n\n%s: onStop\n\nOn Hierarchy: [%s]\n\n********\n\n",getBindingKey().c_str(),Strings::join(getHierarchy()," >> ").c_str());
+    }
 
     void destroySceneRoot();
     void bindSceneRoot(GtkWidget* widget);
     void bindGtkBuilder(GtkBuilder* builder);
 
-
-    Controller* getChildController();
-    Controller* getParentController();
+    void startController(Request* controllerRequest);
+    void startController(string controllerKey,Bundle* package = nullptr);
 
     GtkWidget* getSceneRoot();
     GtkBuilder* getGtkBuilder();
@@ -40,22 +49,29 @@ public:
     Application* getApplication();
     GtkApplication* getGtkApplication();
     GtkWidget* getSceneObj(string objName);
-    ControllerStateManager* getStateManager();
+    GObject* getSceneRawObj(string objName);
+    list<string> getHierarchy();
 
-    void startController(Request* controllerRequest);
+    ControllerStateManager* getStateManager();
 
     void setControllerDependencies(Application* app,ControllerStateManager* stateManager,ViewManager* viewManager);
 
+    Controller* getChildController();
+    Controller* getParentController();
     void setChildController(Controller* controller);
     void setParentController(Controller* controller);
 
     void unrefChildController();
     void unrefParentController();
-
-    void setContentView(string viewPath,bool toplevel);
-    void setContentView(string viewPath,string nodeName = "root",bool toplevel = false);
 protected:
     Controller();
+
+    void finish(bool bindChild = false);
+    void finish(Bundle* package,bool bindChild = false);
+
+    void setTopLevelView(string viewPath);
+    void setContentView(string viewPath,bool toplevel);
+    void setContentView(string viewPath,string nodeName = "root",bool toplevel = false);
 
     bool m_builderBinded;
     bool m_rootSceneBinded;

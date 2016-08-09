@@ -1,4 +1,4 @@
-#ifndef _APP__H_
+#ifndef _APP_H_
 #define _APP_H_
 
 #include <system/facades/Facade.h>

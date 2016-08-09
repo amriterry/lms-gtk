@@ -49,30 +49,75 @@
 			<Add directory="../LibraryManagementSystem" />
 		</Compiler>
 		<Linker>
-			<Add library="gtk-win32-3.0" />
 			<Add library="gobject-2.0" />
 			<Add library="glib-2.0" />
 			<Add library="gio-2.0" />
+			<Add library="gtk-win32-3.0" />
+			<Add library="gdk-win32-3.0" />
 			<Add directory="$(#gtk.lib)" />
 		</Linker>
 		<Unit filename="config/AppProviderRepository.cpp" />
 		<Unit filename="config/AppProviderRepository.h" />
+		<Unit filename="config/AuthConfig.cpp" />
+		<Unit filename="config/AuthConfig.h" />
 		<Unit filename="controllers/AppControllerRepository.cpp" />
 		<Unit filename="controllers/AppControllerRepository.h" />
+		<Unit filename="controllers/IssueBookController.cpp" />
+		<Unit filename="controllers/IssueBookController.h" />
 		<Unit filename="controllers/LoginController.cpp" />
 		<Unit filename="controllers/LoginController.h" />
 		<Unit filename="controllers/MainController.cpp" />
 		<Unit filename="controllers/MainController.h" />
+		<Unit filename="controllers/SaveAuthorController.cpp" />
+		<Unit filename="controllers/SaveAuthorController.h" />
+		<Unit filename="controllers/SaveBookController.cpp" />
+		<Unit filename="controllers/SaveBookController.h" />
+		<Unit filename="controllers/SaveBookCopiesController.cpp" />
+		<Unit filename="controllers/SaveBookCopiesController.h" />
+		<Unit filename="controllers/SavePublicationController.cpp" />
+		<Unit filename="controllers/SavePublicationController.h" />
+		<Unit filename="controllers/SaveUserController.cpp" />
+		<Unit filename="controllers/SaveUserController.h" />
 		<Unit filename="controllers/SplashController.cpp" />
 		<Unit filename="controllers/SplashController.h" />
 		<Unit filename="controllers/TestController.cpp" />
 		<Unit filename="controllers/TestController.h" />
+		<Unit filename="controllers/UnissueBookCopyController.cpp" />
+		<Unit filename="controllers/UnissueBookCopyController.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="models/AclAction.cpp" />
+		<Unit filename="models/AclAction.h" />
+		<Unit filename="models/AclEntity.cpp" />
+		<Unit filename="models/AclEntity.h" />
+		<Unit filename="models/AclPrivilege.cpp" />
+		<Unit filename="models/AclPrivilege.h" />
+		<Unit filename="models/AclRolePrivilege.cpp" />
+		<Unit filename="models/AclRolePrivilege.h" />
+		<Unit filename="models/Author.cpp" />
+		<Unit filename="models/Author.h" />
+		<Unit filename="models/Book.cpp" />
+		<Unit filename="models/Book.h" />
+		<Unit filename="models/BookAuthor.cpp" />
+		<Unit filename="models/BookAuthor.h" />
+		<Unit filename="models/BookCopy.cpp" />
+		<Unit filename="models/BookCopy.h" />
+		<Unit filename="models/Issue.cpp" />
+		<Unit filename="models/Issue.h" />
+		<Unit filename="models/Publication.cpp" />
+		<Unit filename="models/Publication.h" />
+		<Unit filename="models/Role.cpp" />
+		<Unit filename="models/Role.h" />
 		<Unit filename="models/User.cpp" />
 		<Unit filename="models/User.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="system/auth/AuthManager.cpp" />
+		<Unit filename="system/auth/AuthManager.h" />
+		<Unit filename="system/auth/AuthServiceProvider.cpp" />
+		<Unit filename="system/auth/AuthServiceProvider.h" />
+		<Unit filename="system/auth/UserInterface.h" />
+		<Unit filename="system/bundle/BindingType.h" />
 		<Unit filename="system/bundle/Bundle.cpp" />
 		<Unit filename="system/bundle/Bundle.h" />
 		<Unit filename="system/bundle/BundleServiceProvider.cpp" />
@@ -93,6 +138,7 @@
 		<Unit filename="system/controller/ControllerStateManager.h" />
 		<Unit filename="system/database/Binding.cpp" />
 		<Unit filename="system/database/Binding.h" />
+		<Unit filename="system/database/BindingInfo.h" />
 		<Unit filename="system/database/DatabaseManager.cpp" />
 		<Unit filename="system/database/DatabaseManager.h" />
 		<Unit filename="system/database/DatabaseServiceProvider.cpp" />
@@ -116,8 +162,11 @@
 		<Unit filename="system/database/model/Model.h" />
 		<Unit filename="system/database/model/ModelQueryBuilder.cpp" />
 		<Unit filename="system/database/model/ModelQueryBuilder.h" />
+		<Unit filename="system/database/query/JoinStatement.h" />
 		<Unit filename="system/database/query/QueryBuilder.cpp" />
 		<Unit filename="system/database/query/QueryBuilder.h" />
+		<Unit filename="system/database/query/RowCallback.h" />
+		<Unit filename="system/database/query/WhereBinding.h" />
 		<Unit filename="system/database/query/grammar/Grammar.cpp" />
 		<Unit filename="system/database/query/grammar/Grammar.h" />
 		<Unit filename="system/database/query/grammar/SQLiteGrammar.h" />
@@ -127,17 +176,21 @@
 		<Unit filename="system/events/EventServiceProvider.h" />
 		<Unit filename="system/events/UnregisteredEventFiringException.cpp" />
 		<Unit filename="system/events/UnregisteredEventFiringException.h" />
-		<Unit filename="system/facades/AppFacade.h" />
+		<Unit filename="system/facades/App.h" />
+		<Unit filename="system/facades/Auth.h" />
 		<Unit filename="system/facades/BundleFacade.h" />
 		<Unit filename="system/facades/ConfigManagerFacade.h" />
 		<Unit filename="system/facades/ControllerLifeManagerFacade.h" />
 		<Unit filename="system/facades/ControllerManagerFacade.h" />
+		<Unit filename="system/facades/DB.h" />
 		<Unit filename="system/facades/EventFacade.h" />
 		<Unit filename="system/facades/Facade.cpp" />
 		<Unit filename="system/facades/Facade.h" />
+		<Unit filename="system/facades/Facades.h" />
+		<Unit filename="system/facades/Hash.h" />
 		<Unit filename="system/facades/PathFacade.h" />
 		<Unit filename="system/facades/RequestFacade.h" />
-		<Unit filename="system/facades/ViewFacade.h" />
+		<Unit filename="system/facades/View.h" />
 		<Unit filename="system/foundation/Application.cpp" />
 		<Unit filename="system/foundation/Application.h" />
 		<Unit filename="system/foundation/Container.cpp" />
@@ -162,6 +215,16 @@
 		<Unit filename="system/hash/HashFactory.h" />
 		<Unit filename="system/hash/HashServiceProvider.cpp" />
 		<Unit filename="system/hash/HashServiceProvider.h" />
+		<Unit filename="system/helpers/DateTime.cpp" />
+		<Unit filename="system/helpers/DateTime.h" />
+		<Unit filename="system/helpers/DateTimeParams.h" />
+		<Unit filename="system/helpers/Gtk.cpp" />
+		<Unit filename="system/helpers/Gtk.h" />
+		<Unit filename="system/helpers/Stl.cpp" />
+		<Unit filename="system/helpers/Stl.h" />
+		<Unit filename="system/helpers/Strings.cpp" />
+		<Unit filename="system/helpers/Strings.h" />
+		<Unit filename="system/helpers/helpers.h" />
 		<Unit filename="system/request/Request.cpp" />
 		<Unit filename="system/request/Request.h" />
 		<Unit filename="system/request/RequestServiceProvider.cpp" />
@@ -214,6 +277,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="vendor/sqlite/sqlite3.h" />
+		<Unit filename="vendor/support/strptime.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vendor/support/strptime.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

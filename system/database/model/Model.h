@@ -5,7 +5,11 @@
 
 #include <system/support/IEventPublisher.h>
 #include <system/database/connections/QueryResult.h>
+#include <system/database/query/QueryBuilder.h>
 #include <system/database/model/ModelQueryBuilder.h>
+#include <system/database/connections/statements/Statement.h>
+
+#include <system/helpers/helpers.h>
 
 using namespace std;
 
@@ -25,6 +29,8 @@ public:
 
 	static QueryBuilder* select(vector<string> columns);
 
+	static QueryBuilder* table(string table);
+
 	template<typename T>
 	static T* find(int primaryKey){
 		T* model = new T();
@@ -32,11 +38,21 @@ public:
 	}
 
 	template<typename T>
-	static QueryResult all(vector<string> selectStatements){
+	static QueryResult all(vector<string> selectStatements = {"*"}){
 		T* model = new T();
-		return model->newQuery()->get(selectStatements);
+		QueryResult result = model->newQuery()->get(selectStatements);
+		delete model;
+		return result;
 	}
 
+	template<typename T>
+	static void all(RowCallback callback,Bundle* data = nullptr,vector<string> selectStatements = {"*"}){
+		T* model = new T();
+		model->newQuery()->get(selectStatements,callback,data);
+		delete model;
+	}
+
+	bool exists();
 	bool saveRow();
 	bool deleteRow();
 	QueryRow fetch();
@@ -48,6 +64,7 @@ public:
 
 	QueryRow getDirty();
 
+	int getKey();
 	virtual string getKeyName();
 	virtual bool usesTimestamps();
 	virtual string getTableName();
@@ -70,10 +87,10 @@ protected:
 
 	ModelQueryBuilder* newQuery();
 
-	void finishSave();
+	void finishSave(int savedId = 0);
 	void finishDelete();
 	bool performUpdate(ModelQueryBuilder* query);
-	bool performInsert(ModelQueryBuilder* query);
+	int performInsert(ModelQueryBuilder* query);
 
 	bool isDirty();
 

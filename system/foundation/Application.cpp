@@ -39,7 +39,7 @@ Application* Application::m_instance = nullptr;
 /**
  * @brief Application 'ctor'
  * @details Does all application preboot process
- * 
+ *
  * @param appId Application Identifier
  * @param appName Application Name
  * @param flags GApplicationFlags to create GApplicaton object
@@ -47,18 +47,18 @@ Application* Application::m_instance = nullptr;
 Application::Application(string appId,string appName,GApplicationFlags flags) : m_appId(appId), m_appName(appName), m_flags(flags){
     g_message("Application: Application Created");
 
-    //  Set both prebooted and booted state variables to false as it is the 
+    //  Set both prebooted and booted state variables to false as it is the
     //  initial condition at first
     this->m_prebooted = false;
     this->m_booted = false;
 
-    //  Setting Application object into the Facade class so that Facades can 
+    //  Setting Application object into the Facade class so that Facades can
     //  resolve objects out of container
     Facade::setFacadeApplication(this);
 
     //  Registering Base Managers so that stuffs like event handling can be done
     this->registerBaseManagers();
-    //  Resolving Manager dependencies and injecting into this object so that 
+    //  Resolving Manager dependencies and injecting into this object so that
     //  application can use manager objects
     this->resolveManagerDependencies();
 
@@ -69,7 +69,7 @@ Application::Application(string appId,string appName,GApplicationFlags flags) : 
     //  Application can use the services
     this->resolveServiceDependencies();
 
-    //  Registering Base application events such as 'boot' event so that 
+    //  Registering Base application events such as 'boot' event so that
     //  event handlers can handle events properly
     this->registerBaseApplicationEvents();
 
@@ -89,7 +89,7 @@ Application::~Application(){
 
 /**
  * @brief Creates the Application object
- * 
+ *
  * @param appId Application Identifier
  * @param appName Application Name
  * @param flags GApplicationFlags to created GApplication object
@@ -348,7 +348,7 @@ void Application::bootUp(){
     this->m_GtkApp = gtk_application_new(this->m_appId.c_str(),this->m_flags);
     g_message("Application: GtkApplication created");
 
-    //  Setting 'activate' callback for the 'GtkApplication' 
+    //  Setting 'activate' callback for the 'GtkApplication'
     //  so that some configuration can be carried out.
     this->setActivateCallback([&](GtkApplication* gapp,gpointer data){
         g_message("Application: GtkApplication activated");
@@ -358,6 +358,10 @@ void Application::bootUp(){
         //  This window is set with default title of the application's name
         GtkWidget* window = gtk_application_window_new(gapp);
         gtk_window_set_title(GTK_WINDOW(window),app->getAppName().c_str());
+        //  Centering the window
+        gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_CENTER);
+        //  Maximizing the window
+        gtk_window_maximize(GTK_WINDOW(window));
 
         //  Getting the 'windowId' of the window created before
         guint window_id = gtk_application_window_get_id(GTK_APPLICATION_WINDOW(window));
@@ -377,10 +381,10 @@ void Application::bootUp(){
 
 /**
  * @brief Runs the application
- * 
+ *
  * @param argc number of command-line arguments
  * @param argv array of command-line arguments
- * 
+ *
  * @return int
  */
 int Application::run(int &argc,char** &argv){
@@ -415,7 +419,7 @@ void Application::loadDefaultController(){
 
 /**
  * @brief Runs all the callbacks for application preboot event
- * 
+ *
  * @param publisher The event publisher object passed for the callback
  */
 void Application::onPreboot(IEventPublisher* publisher){
@@ -427,7 +431,7 @@ void Application::onPreboot(IEventPublisher* publisher){
 
 /**
  * @brief Runs all the callbacks for the application boot event
- * 
+ *
  * @param publisher The event publisher object passed for the callback
  */
 void Application::onBoot(IEventPublisher* publisher){
@@ -439,7 +443,7 @@ void Application::onBoot(IEventPublisher* publisher){
 
 /**
  * @brief Runs all the callbacks for the application quit event
- * 
+ *
  * @param publisher The event publisher object passed for the callback
  */
 void Application::onQuit(IEventPublisher* publisher){
@@ -451,7 +455,7 @@ void Application::onQuit(IEventPublisher* publisher){
 
 /**
  * @brief Registers preboot callback to the list of preboot callbacks
- * 
+ *
  * @param prebootCallback Function object for the callback
  */
 void Application::setPrebootCallback(ApplicationEventCallback prebootCallback){
@@ -460,7 +464,7 @@ void Application::setPrebootCallback(ApplicationEventCallback prebootCallback){
 
 /**
  * @brief Registers boot callback to the list of boot callbacks
- * 
+ *
  * @param bootCallback Function object for the callback
  */
 void Application::setBootCallback(ApplicationEventCallback bootCallback){
@@ -469,7 +473,7 @@ void Application::setBootCallback(ApplicationEventCallback bootCallback){
 
 /**
  * @brief Registers quit callback to the list of quit callbacks
- * 
+ *
  * @param quitCallback Function object for the callback
  */
 void Application::setQuitCallback(ApplicationEventCallback quitCallback){
@@ -478,7 +482,7 @@ void Application::setQuitCallback(ApplicationEventCallback quitCallback){
 
 /**
  * @brief Registers the activate callback to the list
- * 
+ *
  * @param activatedCallback Function object for the callback
  * @param data Any additional data for the callback
  */
@@ -488,7 +492,7 @@ void Application::setActivateCallback(ApplicationCallback activatedCallback,gpoi
 
 /**
  * @brief Registers the shutdown callback to the list
- * 
+ *
  * @param activatedCallback Function object for the callback
  * @param data Any additional data for the callback
  */
@@ -498,7 +502,7 @@ void Application::setShutdownCallback(ApplicationCallback shutdownCallback,gpoin
 
 /**
  * @brief Loads configuration from the config repository
- * 
+ *
  * @param configRepo ConfigRepository object to load configurations from
  */
 void Application::loadConfiguration(ConfigRepository* configRepo){
@@ -520,7 +524,7 @@ void Application::loadConfiguration(ConfigRepository* configRepo){
 
 /**
  * @brief Loads providers from the provider repository
- * 
+ *
  * @param providerRepo ProviderRepository object from which the providers are to be loaded
  */
 void Application::loadProviders(ProviderRepository* providerRepo){
@@ -529,7 +533,7 @@ void Application::loadProviders(ProviderRepository* providerRepo){
 
 /**
  * @brief Loads Controllers from controller Repository
- * 
+ *
  * @param controllerRepo ControllerRepository object from which the controllers are to be loaded
  */
 void Application::loadControllers(ControllerRepository* controllerRepo){

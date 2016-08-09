@@ -18,6 +18,7 @@ public:
 	GtkWidget* setScene(Controller* controller,string viewPath,string rootName = "root",bool topLevel = false);
 	GtkWidget* setScene(GtkWidget* scene,bool topLevel = false);
 	GtkWidget* setScene(GtkWindow* stage,GtkWidget* scene,bool topLevel = false);
+	void setGlobalStylesheet(string filePath);
 private:
 	Application* m_app;
 	GtkApplication* m_gtkApp;

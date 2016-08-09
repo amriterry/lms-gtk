@@ -6,6 +6,8 @@
 
 #include <system/database/query/QueryBuilder.h>
 
+#include <system/helpers/helpers.h>
+
 using namespace std;
 
 namespace tuber{
@@ -24,12 +26,13 @@ string Grammar::compileSelect(QueryBuilder* builder){
 	sql.push_back(this->compileGroupBy(builder));
 	sql.push_back(this->compileHaving(builder));
 	sql.push_back(this->compileOrderBy(builder));
+	sql.push_back(this->compileLimit(builder));
 
-	return this->concatenateComponents(sql," ");
+	return Strings::join(sql," ");
 }
 
 string Grammar::compileColumns(QueryBuilder* builder){
-	return this->concatenateComponents(builder->getColumns(),",");
+	return Strings::join(builder->getColumns(),",");
 }
 
 string Grammar::compileFrom(QueryBuilder* builder){
@@ -43,7 +46,7 @@ string Grammar::compileJoin(QueryBuilder* builder){
 		for(auto stmt: joins){
 			joinStmt.push_back(stmt.joinMethod + string(" join ") + stmt.table + string(" on ") + stmt.statement);
 		}
-		return this->concatenateComponents(joinStmt,",");
+		return Strings::join(joinStmt," ");
 	}
 	return "";
 }
@@ -56,12 +59,16 @@ string Grammar::compileWhere(QueryBuilder* builder){
 		for(vector<WhereBinding>::iterator clause = whereClauses.begin();clause != whereClauses.end(); ++clause){
 			string stmt;
 			if(clause != whereClauses.begin()){
-				stmt += clause->boolean;
+				stmt += clause->boolean + string(" ");
 			}
-			stmt += clause->column + string(" ") + clause->operatorValue + string(" ?");
+			if(clause->type == BindingType::RAW){
+				stmt += clause->column;
+			} else {
+				stmt += clause->column + string(" ") + clause->operatorValue + string(" ?");
+			}
 			whereStmt.push_back(stmt);
 		}
-		return this->concatenateComponents(whereStmt," ");
+		return Strings::join(whereStmt," ");
 	}
 	return "";
 }
@@ -69,7 +76,7 @@ string Grammar::compileWhere(QueryBuilder* builder){
 string Grammar::compileGroupBy(QueryBuilder* builder){
 	vector<string> groupByClause = builder->getGroupByStatements();
 	if(groupByClause.size()){
-		return string("group by ") + this->concatenateComponents(groupByClause,",");
+		return string("group by ") + Strings::join(groupByClause,",");
 	}
 	return "";
 }
@@ -79,14 +86,14 @@ string Grammar::compileHaving(QueryBuilder* builder){
 	if(havings.size()){
 		list<string> havingClause;
 		for(auto clause: havings){
-			string clauseString;
+			string clauseStrings;
 			if(clause != *(havings.begin())){
-				clauseString += clause.second;
+				clauseStrings += clause.second;
 			}
-			clauseString += clause.first;
-			havingClause.push_front(clauseString);
+			clauseStrings += clause.first;
+			havingClause.push_front(clauseStrings);
 		}
-		return string("having ") + this->concatenateComponents(havingClause," ");
+		return string("having ") + Strings::join(havingClause," ");
 	}
 	return "";
 }
@@ -98,9 +105,18 @@ string Grammar::compileOrderBy(QueryBuilder* builder){
 		for(auto clause: orders){
 			orderClause.push_front(clause.first + string(" ") + clause.second);
 		}
-		return string("order by ") + this->concatenateComponents(orderClause,",");
+		return string("order by ") + Strings::join(orderClause,",");
 	}
 	return "";
+}
+
+string Grammar::compileLimit(QueryBuilder* builder){
+	int limit = builder->getLimit();
+	int offset = builder->getOffset();
+	if(limit == 0){
+		return "";
+	}
+	return string("limit ?,?");
 }
 
 string Grammar::compileInsert(QueryBuilder* builder){
@@ -110,7 +126,7 @@ string Grammar::compileInsert(QueryBuilder* builder){
 	sql.push_back(string("values"));
 	sql.push_back(string("(") + this->compileColumnValues(builder) + string(")"));
 
-	string compiled = this->concatenateComponents(sql," ");
+	string compiled = Strings::join(sql," ");
 	g_message("Grammar: compiled query: \n\n[%s]\n\n",compiled.c_str());
 	return compiled;
 }
@@ -122,7 +138,7 @@ string Grammar::compileUpdate(QueryBuilder* builder){
 	sql.push_back(this->compileNameValuePair(builder));
 	sql.push_back(this->compileWhere(builder));
 
-	string compiled = this->concatenateComponents(sql," ");
+	string compiled = Strings::join(sql," ");
 	g_message("Grammar: compiled query: \n\n[%s]\n\n",compiled.c_str());
 	return compiled;
 }
@@ -132,7 +148,7 @@ string Grammar::compileDelete(QueryBuilder* builder){
 	sql.push_back(this->compileFrom(builder));
 	sql.push_back(this->compileWhere(builder));
 
-	return this->concatenateComponents(sql," ");
+	return Strings::join(sql," ");
 }
 
 string Grammar::compileColumnValues(QueryBuilder* builder){
@@ -153,10 +169,10 @@ string Grammar::compileNameValuePair(QueryBuilder* builder){
 	for(auto it: columns){
 		nameValue.push_back(it + " = ?");
 	}
-	return this->concatenateComponents(nameValue,",");
+	return Strings::join(nameValue,",");
 }
 
-string Grammar::concatenateComponents(vector<string> strings,string glue){
+/*string Grammar::concatenateComponents(vector<string> strings,string glue){
 	string concatenated;
 	for(auto element: strings){
 		if(element != strings.back() && element != ""){
@@ -176,6 +192,6 @@ string Grammar::concatenateComponents(list<string> strings,string glue){
 		concatenated += element;
 	}
 	return concatenated;
-}
+}*/
 
 }

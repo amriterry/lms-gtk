@@ -12,6 +12,7 @@ using namespace std;
 namespace tuber{
 
 class Application;
+class Bundle;
 class Request;
 class ControllerLifeCycleManager;
 
@@ -24,7 +25,7 @@ public:
 	void loadController(string controllerKey);
 	void loadController(Request* controllerRequest,Controller* clientController);
 
-	void destroyController(Controller* controller);
+	void destroyController(Controller* controller,Bundle* package = nullptr);
 protected:
 	void registerController(string controllerKey,ControllerResolvingCallback callback);
     bool isControllerRegistered(string controllerKey);

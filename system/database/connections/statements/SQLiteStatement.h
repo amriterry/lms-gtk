@@ -18,6 +18,15 @@ public:
 	virtual Statement* step(Binding* bindings);
 	virtual Statement* execute(string query,Binding* bindings);
 	virtual QueryResult executeAndFetch(string query,Binding* bindings);
+	virtual void executeWithCallback(string query,Binding* bindings,RowCallback callback,Bundle* data);
+	virtual int getColumnCount();
+	virtual int getColumnPos(string columnName);
+	virtual map<string,int> getColumnNames();
+
+	virtual int getInt(string columnName);
+	virtual double getDouble(string columnName);
+	virtual string getString(string columnName);
+
 	virtual ~SQLiteStatement();
 protected:
 	sqlite3* m_connection;

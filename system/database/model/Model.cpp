@@ -54,6 +54,16 @@ string Model::getTableName(){
 	return this->m_table;
 }
 
+int Model::getKey(){
+	if(this->m_original != nullptr && this->m_original->hasInt(this->getKeyName())){
+		return this->m_original->getInt(this->getKeyName());
+	}
+	if(this->m_attributes != nullptr && this->m_attributes->hasInt(this->getKeyName())){
+		return this->m_attributes->getInt(this->getKeyName());
+	}
+	return 0;
+}
+
 string Model::getKeyName(){
 	return this->m_primaryKey;
 }
@@ -69,15 +79,7 @@ bool Model::usesTimestamps(){
 }
 
 string Model::getFreshTime(){
-	time_t rawtime;
-	struct tm* timeinfo;
-	char buffer [80];
-
-	time (&rawtime);
-	timeinfo = localtime (&rawtime);
-	strftime (buffer,80,"%Y-%m-%d %H:%M:%S",timeinfo);
-
-	return string(buffer);
+	return DateTime::getCurrentDateTime();
 }
 
 void Model::setCreatedAt(string timestamp){
@@ -90,7 +92,7 @@ void Model::setUpdatedAt(string timestamp){
 
 void Model::updateTimestamps(){
 	string timestr = this->getFreshTime();
-	if(this->isDirty()){
+	if(this->m_exists){
 		this->setUpdatedAt(timestr);
 	} else {
 		this->setCreatedAt(timestr);
@@ -111,7 +113,7 @@ Model* Model::fill(QueryRow row){
 	if(row->empty()){
 		g_message("Model: Not empty row");
 	}
-	this->m_attributes = row;
+	this->m_attributes->clone(row);
 	g_message("Model: Row copied");
 	if(this->m_attributes->hasInt(this->getKeyName())){
 		g_message("Model: Has Primary Key");
@@ -143,21 +145,36 @@ QueryRow Model::fetch(){
 
 QueryBuilder* Model::select(vector<string> columns){
 	Model* model = new Model();
-	return model->newQuery()->getQueryBuilder()->select(columns);
+	QueryBuilder* builder = model->newQuery()->getQueryBuilder()->select(columns);
+	delete model;
+	return builder;
+}
+
+QueryBuilder* Model::table(string table){
+	Model* model = new Model();
+	QueryBuilder* builder = model->newQuery()->getQueryBuilder()->table(table);
+	delete model;
+	return builder;
 }
 
 bool Model::saveRow(){
 	ModelQueryBuilder* query = this->newQuery();
+	int savedId;
 	bool saved = false;
 	if(this->m_exists){
 		//...found primary key, so update
+		savedId = this->fetch()->getInt(this->getKeyName());
 		saved = this->performUpdate(query);
+
 	} else {
 		//...primary key not found so insert
-		saved = this->performInsert(query);
+		savedId = this->performInsert(query);
+		if(savedId != 0){
+			saved = true;
+		}
 	}
 	if(saved){
-		this->finishSave();
+		this->finishSave(savedId);
 	}
 	return saved;
 }
@@ -185,7 +202,11 @@ QueryRow Model::getDirty(){
 	return this->m_attributes;
 }
 
-void Model::finishSave(){
+void Model::finishSave(int savedId){
+	if(savedId != 0){
+		g_message("Saved row id: %i",savedId);
+		this->getDirty()->putExtra(this->getKeyName(),savedId);
+	}
 	this->moveToOriginal();
 }
 
@@ -202,7 +223,7 @@ bool Model::performUpdate(ModelQueryBuilder* query){
 	return query->update(this->getDirty());
 }
 
-bool Model::performInsert(ModelQueryBuilder* query){
+int Model::performInsert(ModelQueryBuilder* query){
 	g_message("Model: inserting to database");
 	if(this->usesTimestamps()){
 		this->updateTimestamps();
@@ -217,6 +238,10 @@ Bundle* Model::getOriginalBundle(){
 
 Bundle* Model::getAttributesBundle(){
 	return this->m_attributes;
+}
+
+bool Model::exists(){
+	return m_exists;
 }
 
 }

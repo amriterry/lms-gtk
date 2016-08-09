@@ -27,6 +27,12 @@ string QueryBuilder::toSql(){
 }
 
 Binding* QueryBuilder::getBindings(){
+	if(!this->m_bindings->hasBindingMetaFor("limit") && this->m_limit != 0){
+		g_message("QueryBuilder: Binding Limit");
+		this->m_bindings->bindInteger(this->m_offset,"limit")
+						->bindInteger(this->m_limit,"limit");
+	}
+	
 	return this->m_bindings;
 }
 
@@ -41,6 +47,10 @@ QueryRow QueryBuilder::first(){
 
 QueryResult QueryBuilder::get(){
 	return this->runSelect();
+}
+
+void QueryBuilder::get(RowCallback callback,Bundle* data){
+	this->m_connection->selectQuery(this->toSql(),callback,this->getBindings(),data);
 }
 
 QueryBuilder* QueryBuilder::take(int limit){
@@ -103,7 +113,12 @@ QueryBuilder* QueryBuilder::where(string column,string operatorValue,double rVal
 }
 
 QueryBuilder* QueryBuilder::whereNull(string column,string operatorValue,string boolean){
-	this->setWhereBinding(column,operatorValue,boolean,BindingType::NULLTYPE)->m_bindings->bindNull();
+	this->setWhereBinding(column,operatorValue,boolean,BindingType::GENERIC)->m_bindings->bindNull();
+	return this;
+}
+
+QueryBuilder* QueryBuilder::whereRaw(string sql,string boolean){
+	this->setWhereBinding(sql,"",boolean,BindingType::RAW);
 	return this;
 }
 
@@ -150,20 +165,16 @@ QueryBuilder* QueryBuilder::setWhereBinding(string column,string operatorValue,s
 	return this;
 }
 
-bool QueryBuilder::insert(Bundle* attributes){
+int QueryBuilder::insert(Bundle* attributes){
 	g_message("QueryBuilder: Insert query");
-	this->compileBundle(attributes);
+	this->compileBundle(attributes,"values");
 	int affected = this->m_connection->insertQuery(this->m_grammar->compileInsert(this),this->m_bindings);
-	if(affected > 0){
-		return true;
-	} else {
-		return false;
-	}
+	return affected;
 }
 
 bool QueryBuilder::update(Bundle* attributes){
 	g_message("QueryBuilder: Update query");
-	this->compileBundle(attributes);
+	this->compileBundle(attributes,"set");
 	g_message("QueryBuilder: Bundle compiled now compiling query itself");
 	int affected = this->m_connection->updateQuery(this->m_grammar->compileUpdate(this),this->m_bindings);
 	if(affected > 0){
@@ -175,7 +186,7 @@ bool QueryBuilder::update(Bundle* attributes){
 
 bool QueryBuilder::deleteData(){
 	g_message("QueryBuilder: delete query");
-	int affected = this->m_connection->deleteQuery(this->m_grammar->compileDelete(this),nullptr);
+	int affected = this->m_connection->deleteQuery(this->m_grammar->compileDelete(this),this->m_bindings);
 	if(affected > 0){
 		return true;
 	} else {
@@ -183,7 +194,8 @@ bool QueryBuilder::deleteData(){
 	}
 }
 
-QueryBuilder* QueryBuilder::compileBundle(Bundle* bundle){
+QueryBuilder* QueryBuilder::compileBundle(Bundle* bundle,string bindingFor){
+	g_message("QueryBuilder: compiling Bundle");
 	int lastPos;
 	for(auto it: bundle->getBindingPositionMap()){
 		int pos = it.first;
@@ -194,71 +206,37 @@ QueryBuilder* QueryBuilder::compileBundle(Bundle* bundle){
 			case BindingType::INTEGER:
 				if(bundle->hasInt(key)){
 					this->m_columns.push_back(key);
-					this->m_bindings->bindInteger(bundle->getInt(key));
+					this->m_bindings->bindInteger(bundle->getInt(key),bindingFor);
 				}
 				break;
 			case BindingType::DOUBLE:
 				if(bundle->hasDouble(key)){
 					this->m_columns.push_back(key);
-					this->m_bindings->bindDouble(bundle->getDouble(key));
+					this->m_bindings->bindDouble(bundle->getDouble(key),bindingFor);
 				}
 				break;
 			case BindingType::BOOLEAN:
 				if(bundle->hasDouble(key)){
 					this->m_columns.push_back(key);
-					this->m_bindings->bindDouble(bundle->getDouble(key));
+					this->m_bindings->bindDouble(bundle->getDouble(key),bindingFor);
 				}
 				break;
 			case BindingType::STRING:
 				if(bundle->hasString(key)){
 					this->m_columns.push_back(key);
-					this->m_bindings->bindString(bundle->getString(key));
+					this->m_bindings->bindString(bundle->getString(key),bindingFor);
 				}
 				break;
-			case BindingType::NULLTYPE:
+			case BindingType::GENERIC:
 				if(bundle->hasGeneric(key)){
 					this->m_columns.push_back(key);
-					this->m_bindings->bindNull();
+					this->m_bindings->bindNull(bindingFor);
 				}
 				break;
 			default:
 				break;
 		}
 	}
-	g_message("QueryBuilder: compiling Bundle");
-	
-	/*g_message("QueryBuilder: int map compiled");
-	map<string,double> doubles = bundle->getDoubleMap();
-	if(!doubles.empty()){
-		for(auto it: doubles){
-			this->m_columns.push_back(it.first);
-			this->m_bindings->bindDouble(it.second);
-		}
-	}
-	g_message("QueryBuilder: double map compiled");
-	map<string,bool> booleans = bundle->getBooleanMap();
-	if(!booleans.empty()){
-		for(auto it: booleans){
-			this->m_columns.push_back(it.first);
-			this->m_bindings->bindBoolean(it.second);
-		}
-	}
-	g_message("QueryBuilder: bool map compiled");
-	map<string,string> stringMap = bundle->getStringMap();
-	if(!stringMap.empty()){
-		for(auto it: stringMap){
-			this->m_columns.push_back(it.first);
-			this->m_bindings->bindString(it.second);
-		}
-	}
-	g_message("QueryBuilder: string map compiled");
-	map<string,void*> nulls = bundle->getGenericMap();
-	if(!nulls.empty()){
-		for(auto it: nulls){
-			this->m_columns.push_back(it.first);
-			this->m_bindings->bindNull();
-		}
-	}*/
 	g_message("QueryBuilder: Bundle compiled");
 	return this;
 }
